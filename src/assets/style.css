@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "zoho-puvi";
+  src: url("../../public/font/Zoho\ Puvi\ Medium.otf");
+}
+* {
+  font-family: "zoho-puvi";
+}
+.active {
+  background: #07545a;
+}
+.active img {
+  background-color: #2bbc7c;
+  border-radius: 3px;
+}
