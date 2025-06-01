@@ -27,5 +27,5 @@ jobs:
             git pull origin main
             npm install
             npm run build
-            pm2 restart react-app || pm2 serve build 3000 --name react-app
+            pm2 restart react-app || pm2 serve dist 3000 --name react-app
           EOF
