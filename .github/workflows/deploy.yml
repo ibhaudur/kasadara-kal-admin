@@ -23,7 +23,7 @@ jobs:
       - name: Deploy to EC2 and restart app
         run: |
           ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-            cd ~/your-react-folder-name  # change this to your actual repo folder
+            cd ~/kasadara-kal-admin  # change this to your actual repo folder
             git pull origin main
             npm install
             npm run build
