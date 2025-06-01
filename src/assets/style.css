@@ -1,6 +1,6 @@
 @font-face {
   font-family: "zoho-puvi";
-  src: url("../../public/font/Zoho\ Puvi\ Medium.otf");
+  src: url("../../public/font/ZohoPuviMedium.otf") format("opentype");
 }
 * {
   font-family: "zoho-puvi";
