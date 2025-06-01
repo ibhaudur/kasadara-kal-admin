@@ -1,8 +1,7 @@
 import React from "react";
 import { Formik, Form, FormikHelpers } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
 // import { postLogin } from "../../../service/apiUrls";
 import {
   LoginFormFields,
@@ -12,14 +11,12 @@ import {
 import CustomInput from "../../../component/Form/CustomInput";
 import Button from "../../../component/UI/Button";
 // import useApiCall from "../../../hooks/useApiCall";
-import { AuthLogin, UserDetails } from "../../../types/pages.types";
+import { AuthLogin } from "../../../types/pages.types";
 // import { addUser } from "../../../store/slice/userSlice";
 import Logo from "../../../../public/images/logo.svg";
 import Banner from "../../../../public/images/login-banner.png";
 
 const Login: React.FC = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   // const { mutate } = useApiCall({
   //   key: postLogin,
   //   url: postLogin,
@@ -29,6 +26,7 @@ const Login: React.FC = () => {
     values: AuthLogin,
     actions: FormikHelpers<AuthLogin>
   ) => {
+    console.log(values, actions);
     //   mutate(values, {
     //     onSuccess: (res : ApiResponse<UserDetails>) => {
     //       actions.setSubmitting(false);
@@ -87,7 +85,7 @@ const Login: React.FC = () => {
                 className="font-medium transition-colors duration-300"
                 to="/#"
               >
-               &nbsp;Terms of service
+                &nbsp;Terms of service
               </Link>{" "}
               &{" "}
               <Link
