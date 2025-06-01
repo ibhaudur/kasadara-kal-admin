@@ -7,7 +7,7 @@ const Candidates: React.FC = () => {
   useEffect(() => {
     dispatch(changeHeader("Candidates"));
   }, []);
-  return <div>Candidates</div>;
+  return <div>Candidatess</div>;
 };
 
 export default Candidates;
