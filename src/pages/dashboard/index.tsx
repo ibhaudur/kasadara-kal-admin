@@ -5,7 +5,7 @@ import { changeHeader } from "../../store/slice/headerSlice";
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(changeHeader("Welcome Ibhaudur"));
+    dispatch(changeHeader("Dashboard"));
   }, []);
   return <div>Dashboard</div>;
 };
