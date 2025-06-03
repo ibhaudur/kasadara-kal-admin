@@ -15,7 +15,7 @@ const Layout: React.FC = () => {
         <div className="bg-gray-100 sticky top-0">
           <Header name={User} />
         </div>
-        <section className="p-3">
+        <section className="p-4">
           <Outlet />
         </section>
       </main>
