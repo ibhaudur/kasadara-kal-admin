@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { changeHeader } from "../../store/slice/headerSlice";
 import ExamCards from "./component/ExamCards";
+import { FaChevronDown } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const ExamList = [
   {
@@ -54,7 +56,7 @@ const ExamList = [
 
 const Exams: React.FC = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(changeHeader("Exams"));
   }, [dispatch]);
@@ -69,12 +71,17 @@ const Exams: React.FC = () => {
           </small>
         </div>
         <div className="relative group inline-block">
-          <button className="bg-[#2BBC7C] rounded-3xl text-[14px] text-white px-5 py-2">
-            Add Exam v
+          <button className="bg-[#2BBC7C] rounded-3xl flex items-center gap-2 text-[14px] text-white px-5 py-2">
+            Add Exam <FaChevronDown className="text-[12px]" />
           </button>
 
           <ul className="absolute right-0 mt-1 w-40 bg-white rounded shadow-xl opacity-0 text-[14px] group-hover:opacity-100 transition-opacity duration-200 z-10">
-            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Exam</li>
+            <li
+              onClick={() => navigate("/exams/addExam")}
+              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            >
+              Exam
+            </li>
             <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
               Quick Test
             </li>

@@ -26,3 +26,16 @@ export interface ExamDetails {
   type: "free" | "paid" | string;
   price?: string;
 }
+export interface ExamFormValues {
+  examName: string;
+  status: string;
+  examType: string;
+  duration: string;
+  totalMarks: string;
+  cost: string;
+  discountCost: string;
+  examStartDate: string;
+  examStartTime: string;
+  validityDate: string;
+  validityTime: string;
+}

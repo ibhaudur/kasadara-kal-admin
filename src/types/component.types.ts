@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface SelectOptions {
   label: string;
   value: string;
@@ -27,16 +29,17 @@ export interface CustomInputProps {
   dateAttribute?: string;
 }
 export interface ButtonProps {
-    splClass: string;
-    btnName: string;
-    handler: () => void;
-  }
-  export interface ModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    title: string;
-    children: React.ReactNode;
-  }
-  export interface SearchBoxProp {
-    placeholder: string;
-  }
+  splClass: string;
+  btnName: string | ReactNode;
+  handler: () => void;
+  type: string;
+}
+export interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+}
+export interface SearchBoxProp {
+  placeholder: string;
+}

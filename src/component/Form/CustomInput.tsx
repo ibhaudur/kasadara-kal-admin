@@ -14,7 +14,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
   optionsList,
   keyValue,
   labelValue,
-  parameter,dateAttribute
+  parameter,dateAttribute,required
 }) => {
   const renderFields = () => {
     if (!name) {
@@ -90,7 +90,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
             min={dateAttribute === "min" ? new Date(Date.now() + 86400000).toISOString().split('T')[0] : ''}
             max={dateAttribute === "max" ? new Date().toISOString().split('T')[0] : ''}
             disabled={disabled}
-            className={`w-full px-3 py-2 border rounded-[10px]  border-[#D4DDE7] focus:outline-none focus:ring-2 focus:ring-[#2BBC7C] ${splClass}`}
+            className={`w-full px-3 py-2 border rounded-[10px]  border-[#D4DDE7] focus:outline-none focus:ring-2 placeholder:text-[12px] focus:ring-[#2BBC7C] ${splClass}`}
           />
         );
     }
@@ -98,8 +98,8 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
   return (
     <React.Fragment>
-      <label className="flex text-sm mb-2 mt-3" htmlFor={name}>
-        {label}
+      <label className="flex text-[13px] mb-1" htmlFor={name}>
+        {label} {required && <span className="text-[#FF4444]">*</span>}
       </label>
       {renderFields()}
       <ErrorMessage

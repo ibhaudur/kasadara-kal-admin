@@ -1,11 +1,60 @@
+import { FaArrowLeft } from "react-icons/fa6";
+import Button from "../../../../component/UI/Button";
+import { useNavigate } from "react-router-dom";
+import { FormikHelpers } from "formik";
+import { ExamFormValues } from "../../../../types/pages.types";
+import ExamForm from "./component/ExamForm";
+import QuestionsForm from "./component/QuestionsForm";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { changeHeader } from "../../../../store/slice/headerSlice";
 
 const AddExam = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(changeHeader("Exams"));
+  }, [dispatch]);
+  
+  const handleSubmit = async (
+    values: ExamFormValues,
+    actions: FormikHelpers<ExamFormValues>
+  ) => {
+    console.log(values, actions);
+  };
   return (
     <section>
-      <div className="bg-white p-3">
-        <p>New Exam</p>
-        <div>
-          <button>Cancel</button>
+      <div className="bg-white flex justify-between p-3">
+        <p className="flex items-center gap-3">
+          <FaArrowLeft
+            className="cursor-pointer"
+            onClick={() => navigate(-1)}
+          />
+          New Exam
+        </p>
+        <div className="flex gap-3">
+          <Button
+            type="outline"
+            btnName="Cancel"
+            splClass="rounded-[30px] text-[15px] border border-[#D4DDE7] px-3 text-black"
+          />
+          <Button
+            type="outline"
+            btnName="Save as draft"
+            splClass="rounded-[30px] text-[15px] border border-[#2BBC7C] px-3 text-[#2BBC7C]"
+          />
+          <Button
+            btnName="Publish"
+            splClass="rounded-[30px] text-[15px] px-3"
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-12 p-4 gap-3">
+        <div className="p-4 col-span-5 bg-white rounded-2xl">
+          <ExamForm handleSubmit={handleSubmit} />
+        </div>
+        <div className="p-4 col-span-7 bg-white rounded-2xl">
+          <QuestionsForm />
         </div>
       </div>
     </section>
