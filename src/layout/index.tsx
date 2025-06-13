@@ -5,7 +5,6 @@ import Header from "./header";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
-
 const Layout: React.FC = () => {
   const User = useSelector((state: RootState) => state?.header?.pageName);
   return (
@@ -15,9 +14,7 @@ const Layout: React.FC = () => {
         <div className="bg-gray-100 sticky top-0">
           <Header name={User} />
         </div>
-        <section className="p-4">
-          <Outlet />
-        </section>
+        <Outlet />
       </main>
     </div>
   );
