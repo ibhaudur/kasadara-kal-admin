@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../../../../../component/UI/Button";
 import { PiUploadSimpleBold } from "react-icons/pi";
+import CreateQuestions from "./CreateQuestions";
 
 const QuestionsForm = () => {
   return (
@@ -17,6 +18,7 @@ const QuestionsForm = () => {
           splClass="rounded text-[12px] border border-[#2BBC7C] px-3 text-[#2BBC7C]"
         />
       </div>
+      <CreateQuestions />
     </React.Fragment>
   );
 };

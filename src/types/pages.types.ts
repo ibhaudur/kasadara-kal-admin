@@ -39,3 +39,18 @@ export interface ExamFormValues {
   validityDate: string;
   validityTime: string;
 }
+export interface Question {
+  question: string;
+  options: {
+    A: string;
+    B: string;
+    C: string;
+    D: string;
+  };
+  answer: string;
+}
+export interface StepsProps {
+  questions: Question[];
+  setSelect: (index: number) => void;
+  select: number;
+};
