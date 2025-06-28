@@ -48,9 +48,28 @@ export interface Question {
     D: string;
   };
   answer: string;
+  description: string;
+}
+export interface QuestionItem {
+  id: number;
+  mark: string;
+  english: Question;
+  tamil: Question;
+}
+export interface QuestionFormProps {
+  select: number;
+  language: "english" | "tamil";
+  questions: QuestionItem[];
+  handleChange: (
+    index: number,
+    language: "english" | "tamil",
+    field: keyof Question,
+    value: string,
+    optionKey?: keyof Question["options"]
+  ) => void;
 }
 export interface StepsProps {
-  questions: Question[];
+  questions: QuestionItem[];
   setSelect: (index: number) => void;
   select: number;
-};
+}

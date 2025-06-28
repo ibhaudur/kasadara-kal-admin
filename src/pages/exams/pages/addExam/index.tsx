@@ -49,11 +49,11 @@ const AddExam = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-12 p-4 gap-3">
-        <div className="p-4 col-span-5 bg-white rounded-2xl">
+      <div className="p-4">
+        <div className="p-4 bg-white rounded-2xl mb-3">
           <ExamForm handleSubmit={handleSubmit} />
         </div>
-        <div className="p-4 col-span-7 bg-white rounded-2xl">
+        <div className="p-4 bg-white rounded-2xl">
           <QuestionsForm />
         </div>
       </div>

@@ -30,25 +30,22 @@ const ExamForm: React.FC<ExamFormProps> = ({ handleSubmit }) => {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <Form className="grid grid-cols-2 gap-3 mt-5">
-            {examFormFields.map((field, index) => {
-              if (field.name === "examName") {
-                return (
-                  <div className="col-span-2">
-                    <CustomInput key={index} {...field} />
-                  </div>
-                );
-              }
-              return (
-                <div className="">
-                  <CustomInput key={index} {...field} />
+          <Form className="grid grid-cols-12 gap-4 mt-5">
+            {examFormFields.slice(0, 4).map((field, index) => (
+              <div
+                key={index}
+                className={index === 0 ? "col-span-6" : "col-span-2"}
+              >
+                <CustomInput {...field} />
+              </div>
+            ))}
+            <div className="col-span-12 grid grid-cols-8 gap-3">
+              {examFormFields.slice(4, 12).map((field, index) => (
+                <div key={index}>
+                  <CustomInput {...field} />
                 </div>
-              );
-            })}
-            <Button
-              splClass="w-full col-span-2 py-2 mt-4 rounded-[30px] transition-colors duration-300 text-white font-medium"
-              btnName={isSubmitting ? "Saving..." : "Save"}
-            />
+              ))}
+            </div>
           </Form>
         )}
       </Formik>

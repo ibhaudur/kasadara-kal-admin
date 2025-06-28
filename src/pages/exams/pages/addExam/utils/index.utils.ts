@@ -55,7 +55,15 @@ export const examFormFields = [
     testId: "exam-type-input",
   },
   {
-    label: "Duration (in minutes)",
+    label: "Attempt per person",
+    name: "attempt",
+    type: "number",
+    placeholder: "Enter count",
+    testId: "attempt-input",
+    required:true
+  },
+  {
+    label: "Duration",
     name: "duration",
     type: "number",
     placeholder: "Enter Duration",
