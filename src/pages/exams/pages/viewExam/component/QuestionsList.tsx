@@ -9,7 +9,7 @@ const QuestionsList: React.FC<QuestionsListProps> = ({ questions }) => {
   const [language, setLanguage] = useState<"English" | "Tamil">("English");
 
   return (
-    <>
+    <React.Fragment>
       {/* Language Toggle */}
       <ul className="p-0 flex gap-3">
         {(["English", "Tamil"] as const).map((item) => (
@@ -83,7 +83,7 @@ const QuestionsList: React.FC<QuestionsListProps> = ({ questions }) => {
           );
         })}
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

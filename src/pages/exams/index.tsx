@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeHeader } from "../../store/slice/headerSlice";
 import ExamCards from "./component/ExamCards";
 import { FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import SearchBox from "../../component/SearchBox";
+import { MdOutlineSwapVert } from "react-icons/md";
 
 const ExamList = [
   {
@@ -55,6 +57,7 @@ const ExamList = [
 ];
 
 const Exams: React.FC = () => {
+  const [active, setActive] = useState<string>("Exams");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -89,6 +92,32 @@ const Exams: React.FC = () => {
               Mock Test
             </li>
           </ul>
+        </div>
+      </div>
+      <div className="flex justify-between items-center mt-5">
+        <small className="text-[14px] text-[#172B4D]">
+          <ul className="p-0 flex gap-2">
+            {(["Exams", "Mock test", "Quick test"] as const).map((item) => (
+              <li
+                key={item}
+                className={`py-2 px-4 rounded-[12px] text-[12px] cursor-pointer ${
+                  active === item
+                    ? "bg-[#2BBC7C] text-white"
+                    : "bg-white"
+                }`}
+                onClick={() => setActive(item)}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </small>
+        <div className="flex gap-3">
+          <SearchBox />
+          <div className="flex items-center w-[100%] px-4 text-[#172B4D] h-[40px] bg-white rounded-[14px] border-[0.6px] border-[#DCDFE4] text-sm">
+            <MdOutlineSwapVert className="text-[20px]" /> &nbsp; Default (date
+            created)
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-3 mt-4 gap-4">
