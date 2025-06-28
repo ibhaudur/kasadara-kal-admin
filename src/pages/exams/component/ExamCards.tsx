@@ -5,13 +5,16 @@ import { LuFileQuestion } from "react-icons/lu";
 import { BiTimeFive } from "react-icons/bi";
 import { IoIosSquare } from "react-icons/io";
 import { ExamDetails } from "../../../types/pages.types";
+import { useNavigate } from "react-router-dom";
 
 type DetailsProps = { details: ExamDetails; index: number };
 
 const ExamCards: React.FC<DetailsProps> = ({ details, index }) => {
+  const navigate = useNavigate();
   return (
     <div
       key={index}
+      onClick={() => navigate(`view/${index + 1}`)}
       className="relative bg-white rounded-2xl p-4 shadow-md overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105"
     >
       {details.type === "free" && (
