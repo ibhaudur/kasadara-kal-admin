@@ -4,7 +4,8 @@ import { ButtonProps } from "../../types/component.types";
 const Button: React.FC<Partial<ButtonProps>> = ({
   splClass,
   btnName,
-  handler,type
+  handler,
+  type,
 }) => {
   if (type === "outline") {
     return (

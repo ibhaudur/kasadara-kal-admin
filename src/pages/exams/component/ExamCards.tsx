@@ -13,7 +13,6 @@ const ExamCards: React.FC<DetailsProps> = ({ details, index }) => {
   const navigate = useNavigate();
   return (
     <div
-      key={index}
       onClick={() => navigate(`view/${index + 1}`)}
       className="relative bg-white rounded-2xl p-4 shadow-md overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105"
     >

@@ -8,16 +8,28 @@ type QuestionsListProps = {
 
 const QuestionsList: React.FC<QuestionsListProps> = ({ questions, select }) => {
   const [language, setLanguage] = useState<"English" | "Tamil">("English");
-
   const questionRefs = useRef<{ [key: number]: HTMLDivElement | null }>({});
+  const isFirstRender = useRef(true);
+  const prevSelect = useRef<number | null>(null);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      prevSelect.current = select;
+      return;
+    }
+    if (prevSelect.current === select) {
+      return;
+    }
+
     if (select && questionRefs.current[select]) {
       questionRefs.current[select]?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
     }
+
+    prevSelect.current = select;
   }, [select]);
 
   return (

@@ -1,6 +1,6 @@
 import { FaArrowLeft } from "react-icons/fa6";
 import Button from "../../../../component/UI/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FormikHelpers } from "formik";
 import { ExamFormValues } from "../../../../types/pages.types";
 import ExamForm from "./component/ExamForm";
@@ -10,12 +10,13 @@ import { useDispatch } from "react-redux";
 import { changeHeader } from "../../../../store/slice/headerSlice";
 
 const AddExam = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(changeHeader("Exams"));
   }, [dispatch]);
-  
+
   const handleSubmit = async (
     values: ExamFormValues,
     actions: FormikHelpers<ExamFormValues>
@@ -30,7 +31,7 @@ const AddExam = () => {
             className="cursor-pointer"
             onClick={() => navigate(-1)}
           />
-          New Exam
+          {id ? "Edit Exam" : "New Exam"}
         </p>
         <div className="flex gap-3">
           <Button

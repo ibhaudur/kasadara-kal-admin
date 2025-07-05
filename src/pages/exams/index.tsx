@@ -77,7 +77,6 @@ const Exams: React.FC = () => {
           <button className="bg-[#2BBC7C] rounded-3xl flex items-center gap-2 text-[14px] text-white px-5 py-2">
             Add Exam <FaChevronDown className="text-[12px]" />
           </button>
-
           <ul className="absolute right-0 mt-1 w-40 bg-white rounded shadow-xl opacity-0 text-[14px] group-hover:opacity-100 transition-opacity duration-200 z-10">
             <li
               onClick={() => navigate("/exams/addExam")}
@@ -122,7 +121,7 @@ const Exams: React.FC = () => {
       </div>
       <div className="grid grid-cols-3 mt-4 gap-4">
         {ExamList.map((item, index) => {
-          return <ExamCards details={item} index={index} />;
+          return <ExamCards key={index} details={item} index={index} />;
         })}
       </div>
     </section>

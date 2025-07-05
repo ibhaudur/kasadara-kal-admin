@@ -94,6 +94,8 @@ const Header = () => {
           <Button
             btnName="Edit"
             splClass="rounded-[30px] h-[40px] text-[15px] px-6"
+            handler={() => navigate('/exams/edit/2')}
+            
           />
         </div>
         <p>

@@ -24,6 +24,7 @@ const AllRoutes: React.FC = () => {
             <Route path="exams" element={<Exams />} />
             <Route path="exams/addExam" element={<AddExam />} />
             <Route path="exams/view/:id" element={<ViewExam />} />
+            <Route path="exams/edit/:id" element={<AddExam />} />
             <Route path="payments" element={<Payments />} />
             <Route path="candidates" element={<Candidates />} />
             <Route path="report" element={<Reports />} />
