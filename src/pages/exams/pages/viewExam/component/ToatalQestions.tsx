@@ -15,10 +15,10 @@ const ToatalQestions: React.FC<StepsProps> = ({
           <small
             key={index}
             onClick={() => {
-              if (index < questions.length) setSelect(index);
+              if (index < questions.length) setSelect(index + 1);
             }}
             className={`w-[35px] h-[35px] flex items-center justify-center text-[12px]  rounded-[12px] shrink-0 ${
-              select === index ? "bg-[#2BBC7C] text-white" : "bg-[#F8F8F8]"
+              select === index + 1 ? "bg-[#2BBC7C] text-white" : "bg-[#F8F8F8]"
             } ${
               Number(questions.length) >= index + 1
                 ? "cursor-pointer"

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeHeader } from "../../../../store/slice/headerSlice";
-import Header from "./component/header";
 import ToatalQestions from "./component/ToatalQestions";
 import { QuestionItem } from "../../../../types/pages.types";
 import QuestionsList from "./component/QuestionsList";
+import Header from "./component/Header";
 
 const ViewExam = () => {
-  const [select, setSelect] = useState<number>(0);
+  const [select, setSelect] = useState<number>(1);
   const [questions, setQuestions] = useState<QuestionItem[]>([
     {
       id: 1,
@@ -128,7 +128,7 @@ const ViewExam = () => {
           setSelect={setSelect}
         />
         <div className="bg-white p-4 flex-grow rounded-3xl">
-          <QuestionsList questions={questions} />
+          <QuestionsList select={select} questions={questions} />
         </div>
       </div>
     </section>
