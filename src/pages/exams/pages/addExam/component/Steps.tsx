@@ -28,7 +28,7 @@ const Steps: React.FC<StepsProps> = ({ questions, setSelect, select }) => {
         ref={scrollRef}
         className="flex overflow-x-auto gap-2 px-2 scrollbar-hide"
       >
-        {Array.from({ length: 40 }).map((_, index) => (
+        {Array.from({ length: questions.length }).map((_, index) => (
           <small
             key={index}
             onClick={() => {
