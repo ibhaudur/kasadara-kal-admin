@@ -1,8 +1,8 @@
 import React from "react";
 import { Formik, Form, FormikHelpers } from "formik";
-import { Link } from "react-router-dom";
-// import { toast } from "react-toastify";
-// import { postLogin } from "../../../service/apiUrls";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { postLogin } from "../../../service/apiUrls";
 import {
   LoginFormFields,
   loginInitialValues,
@@ -10,36 +10,40 @@ import {
 } from "../utils/utils";
 import CustomInput from "../../../component/Form/CustomInput";
 import Button from "../../../component/UI/Button";
-// import useApiCall from "../../../hooks/useApiCall";
 import { AuthLogin } from "../../../types/pages.types";
-// import { addUser } from "../../../store/slice/userSlice";
 import Logo from "../../../../public/images/logo.svg";
 import Banner from "../../../../public/images/login-banner.png";
+import useApiCall from "../../../hooks/useApiCall";
+import { ApiError, ApiResponse } from "../../../types/apiservice.types";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../../store/slice/userSlice";
 
 const Login: React.FC = () => {
-  // const { mutate } = useApiCall({
-  //   key: postLogin,
-  //   url: postLogin,
-  //   method: "post",
-  // });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { mutate } = useApiCall({
+    key: postLogin,
+    url: postLogin,
+    method: "post",
+  });
   const handleSubmit = async (
     values: AuthLogin,
     actions: FormikHelpers<AuthLogin>
   ) => {
     console.log(values, actions);
-    //   mutate(values, {
-    //     onSuccess: (res : ApiResponse<UserDetails>) => {
-    //       actions.setSubmitting(false);
-    //       toast.success(res?.message);
-    //       navigate("/dashboard");
-    //       dispatch(addUser(res?.data));
-    //     },
-    //     onError: (err: ApiError) => {
-    //       console.log(err);
-    //       actions.setSubmitting(false);
-    //       toast.error(err.response?.data?.message);
-    //     },
-    //   });
+    mutate(values, {
+      onSuccess: (res: ApiResponse<AuthLogin>) => {
+        actions.setSubmitting(false);
+        toast.success(res?.message);
+        navigate("/dashboard");
+        dispatch(addUser(res?.data));
+      },
+      onError: (err: ApiError) => {
+        console.log(err);
+        actions.setSubmitting(false);
+        toast.error(err.response?.data?.message);
+      },
+    });
   };
 
   return (

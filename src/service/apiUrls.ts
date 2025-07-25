@@ -1,2 +1,2 @@
-export const postLogin = "login";
+export const postLogin = "admin_login";
 

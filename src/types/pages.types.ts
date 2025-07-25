@@ -1,19 +1,12 @@
 export interface AuthLogin {
-  emailId: string;
+  email: string;
   password: string;
+  role: string;
 }
 export interface UserDetails extends AuthLogin {
   _id?: string;
   fullName: string | undefined;
-  contactNumber: string;
-  date?: string;
-  role?: string;
   permission?: string[];
-  dob: string;
-  bloodGroup: string;
-  gender: string;
-  address: string;
-  merchantName?: string;
 }
 
 export interface ExamDetails {
