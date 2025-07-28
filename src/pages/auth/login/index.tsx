@@ -36,7 +36,7 @@ const Login: React.FC = () => {
         actions.setSubmitting(false);
         toast.success(res?.message);
         navigate("/dashboard");
-        dispatch(addUser(res?.data));
+        dispatch(addUser(res));
       },
       onError: (err: ApiError) => {
         console.log(err);

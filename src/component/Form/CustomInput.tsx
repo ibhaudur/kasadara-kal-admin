@@ -1,4 +1,4 @@
-import { ErrorMessage, Field } from "formik";
+import { Field, useFormikContext } from "formik";
 import React, { ReactNode } from "react";
 import { CustomInputProps } from "../../types/component.types";
 
@@ -14,12 +14,20 @@ const CustomInput: React.FC<CustomInputProps> = ({
   optionsList,
   keyValue,
   labelValue,
-  parameter,dateAttribute,required
+  parameter,
+  dateAttribute,
+  required,
 }) => {
+  const { errors, touched } = useFormikContext<any>(); // Add this line
+
+  const isError = name && touched[name] && errors[name];
+
+  const getInputClasses = () =>
+    `w-full px-3 py-2 border rounded-[10px] border-[#D4DDE7] focus:outline-none focus:ring-2 placeholder:text-[12px] text-[13px] focus:ring-[#2BBC7C] ${isError ? 'border-red-500' : ''} ${splClass}`;
+
   const renderFields = () => {
-    if (!name) {
-      return null;
-    }
+    if (!name) return null;
+
     switch (type) {
       case "select":
         return (
@@ -29,7 +37,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
             id={name}
             data-testid={testId}
             disabled={disabled}
-            className={`w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#6243cc] ${splClass}`}
+            className={`w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#6243cc] ${isError ? 'border-red-500' : ''} ${splClass}`}
           >
             <option value="" disabled>
               {placeholder}
@@ -37,10 +45,10 @@ const CustomInput: React.FC<CustomInputProps> = ({
             {parameter
               ? optionsList?.[parameter]?.map((option) => (
                   <option
-                    key={keyValue ? option?.[keyValue] as string: ""}
-                    value={keyValue ? option?.[keyValue] as string: ""} 
+                    key={keyValue ? option?.[keyValue] as string : ""}
+                    value={keyValue ? option?.[keyValue] as string : ""}
                   >
-                    {labelValue ? option?.[labelValue as string] as ReactNode: ""}
+                    {labelValue ? option?.[labelValue as string] as ReactNode : ""}
                   </option>
                 ))
               : options?.map((option) => (
@@ -50,6 +58,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 ))}
           </Field>
         );
+
       case "radio":
         return (
           <div className={`flex ${splClass}`}>
@@ -67,6 +76,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
             ))}
           </div>
         );
+
       case "textarea":
         return (
           <Field
@@ -76,9 +86,10 @@ const CustomInput: React.FC<CustomInputProps> = ({
             data-testid={testId}
             placeholder={placeholder}
             disabled={disabled}
-            className={`w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#2BBC7C] ${splClass}`}
+            className={`${getInputClasses()}`}
           />
         );
+
       default:
         return (
           <Field
@@ -87,10 +98,10 @@ const CustomInput: React.FC<CustomInputProps> = ({
             id={name}
             data-testid={testId}
             placeholder={placeholder}
-            min={dateAttribute === "min" ? new Date(Date.now() + 86400000).toISOString().split('T')[0] : ''}
-            max={dateAttribute === "max" ? new Date().toISOString().split('T')[0] : ''}
+            min={dateAttribute === "min" ? new Date(Date.now() + 86400000).toISOString().split("T")[0] : ""}
+            max={dateAttribute === "max" ? new Date().toISOString().split("T")[0] : ""}
             disabled={disabled}
-            className={`w-full px-3 py-2 border rounded-[10px] border-[#D4DDE7] focus:outline-none focus:ring-2 placeholder:text-[12px] text-[13px] focus:ring-[#2BBC7C] ${splClass}`}
+            className={`${getInputClasses()}`}
           />
         );
     }
@@ -102,11 +113,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
         {label} {required && <span className="text-[#FF4444]">*</span>}
       </label>
       {renderFields()}
-      <ErrorMessage
-        name={name}
-        component="div"
-        className="text-red-500 text-sm mt-1"
-      />
     </React.Fragment>
   );
 };

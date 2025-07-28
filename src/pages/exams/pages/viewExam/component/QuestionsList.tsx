@@ -61,7 +61,7 @@ const QuestionsList: React.FC<QuestionsListProps> = ({ questions, select }) => {
                 questionRefs.current[item.id] = el;
               }}
               key={item.id}
-              className="my-3 border-b border-b-[#E5E5E5] py-3 last:border-b-0 scroll-mt-16"
+              className="my-3 border-b border-b-[#E5E5E5] py-3 last:border-b-0 scroll-mt-30"
             >
               <p className="font-bold text-[15px]">
                 {item.id}. {q.question}

@@ -5,7 +5,7 @@ export interface AuthLogin {
 }
 export interface UserDetails extends AuthLogin {
   _id?: string;
-  fullName: string | undefined;
+  name: string | undefined;
   permission?: string[];
 }
 
@@ -20,17 +20,18 @@ export interface ExamDetails {
   price?: string;
 }
 export interface ExamFormValues {
-  examName: string;
+  exam_name: string;
   status: string;
-  examType: string;
+  exam_type: string;
   duration: string;
-  totalMarks: string;
+  total_marks: string;
   cost: string;
-  discountCost: string;
-  examStartDate: string;
+  discount_cost: string;
+  start_datetime: string;
   examStartTime: string;
-  validityDate: string;
+  valid_until: string;
   validityTime: string;
+  attempt_per_person: string;
 }
 export interface Question {
   question: string;
@@ -65,4 +66,8 @@ export interface StepsProps {
   questions: QuestionItem[];
   setSelect: (index: number) => void;
   select: number;
+}
+export interface QuestionsStateProps {
+  questions: QuestionItem[];
+  setQuestions: React.Dispatch<React.SetStateAction<QuestionItem[]>>;
 }

@@ -2,43 +2,47 @@ import * as Yup from "yup";
 import { ExamFormValues } from "../../../../../types/pages.types";
 
 export const examInitialValues: ExamFormValues = {
-  examName: "",
+  exam_name: "",
   status: "",
-  examType: "",
+  exam_type: "",
   duration: "",
-  totalMarks: "",
+  total_marks: "",
   cost: "",
-  discountCost: "",
-  examStartDate: "",
+  discount_cost: "",
+  start_datetime: "",
+  attempt_per_person: "",
   examStartTime: "",
-  validityDate: "",
+  valid_until: "",
   validityTime: "",
 };
 export const examSchema = Yup.object().shape({
-  examName: Yup.string().required("Exam Name is required"),
+  exam_name: Yup.string().required("Exam Name is required"),
   status: Yup.string(),
-  examType: Yup.string(),
+  exam_type: Yup.string(),
   duration: Yup.number().required("Duration is required").positive().integer(),
-  totalMarks: Yup.number()
+  attempt_per_person: Yup.number()
+    .required("Attempt per person is required")
+    .min(0),
+  total_marks: Yup.number()
     .required("Total Marks is required")
     .positive()
     .integer(),
   cost: Yup.number().required("Cost is required").min(0),
-  discountCost: Yup.number().min(0),
-  examStartDate: Yup.date().required("Exam Start Date is required"),
+  discount_cost: Yup.number().required("Discount Cost is required").min(0),
+  start_datetime: Yup.date().required("Exam Start Date is required"),
   examStartTime: Yup.string().required("Exam Start Time is required"),
-  validityDate: Yup.date().required("Validity Date is required"),
+  valid_until: Yup.date().required("Validity Date is required"),
   validityTime: Yup.string().required("Validity Time is required"),
 });
 
 export const examFormFields = [
   {
     label: "Exam Name",
-    name: "examName",
+    name: "exam_name",
     type: "text",
     placeholder: "Enter Exam Name",
     testId: "exam-name-input",
-    required:true
+    required: true,
   },
   {
     label: "Status",
@@ -49,18 +53,18 @@ export const examFormFields = [
   },
   {
     label: "Exam Type",
-    name: "examType",
+    name: "exam_type",
     type: "text",
     placeholder: "Enter Exam Type",
     testId: "exam-type-input",
   },
   {
     label: "Attempt per person",
-    name: "attempt",
+    name: "attempt_per_person",
     type: "number",
     placeholder: "Enter count",
     testId: "attempt-input",
-    required:true
+    required: true,
   },
   {
     label: "Duration",
@@ -68,15 +72,15 @@ export const examFormFields = [
     type: "number",
     placeholder: "Enter Duration",
     testId: "duration-input",
-    required:true
+    required: true,
   },
   {
     label: "Total Marks",
-    name: "totalMarks",
+    name: "total_marks",
     type: "number",
     placeholder: "Enter Total Marks",
     testId: "total-marks-input",
-    required:true
+    required: true,
   },
   {
     label: "Cost",
@@ -84,23 +88,23 @@ export const examFormFields = [
     type: "number",
     placeholder: "Enter Cost",
     testId: "cost-input",
-    required:true
+    required: true,
   },
   {
     label: "Discounted Cost",
-    name: "discountCost",
+    name: "discount_cost",
     type: "number",
     placeholder: "Enter Discounted Cost",
     testId: "discount-cost-input",
-    required:true
+    required: true,
   },
   {
     label: "Exam Start Date",
-    name: "examStartDate",
+    name: "start_datetime",
     type: "date",
     placeholder: "Select Start Date",
     testId: "start-date-input",
-    required:true
+    required: true,
   },
   {
     label: "Exam Start Time",
@@ -108,15 +112,15 @@ export const examFormFields = [
     type: "time",
     placeholder: "Select Start Time",
     testId: "start-time-input",
-    required:true
+    required: true,
   },
   {
     label: "Validity Date",
-    name: "validityDate",
+    name: "valid_until",
     type: "date",
     placeholder: "Select Validity Date",
     testId: "validity-date-input",
-    required:true
+    required: true,
   },
   {
     label: "Validity Time",
@@ -124,6 +128,6 @@ export const examFormFields = [
     type: "time",
     placeholder: "Select Validity Time",
     testId: "validity-time-input",
-    required:true
+    required: true,
   },
 ];

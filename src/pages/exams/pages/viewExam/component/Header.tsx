@@ -19,7 +19,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white flex justify-between p-3">
+    <div className="bg-white flex justify-between p-3 z-30 sticky top-0">
       <div className="flex gap-3">
         <FaArrowLeft
           className="cursor-pointer mt-1"

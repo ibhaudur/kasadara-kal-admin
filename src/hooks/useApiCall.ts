@@ -11,7 +11,7 @@ const useApiCall = ({
     queryKey: [key],
     queryFn: async () => {
       const response = await api.get(url);
-      return response.data.data;
+      return response.data;
     },
     enabled: method === "get",
   });
@@ -20,14 +20,14 @@ const useApiCall = ({
     mutationKey: [key],
     mutationFn: async (data) => {
       const response = await api.post(url, data);
-      return response.data.data;
+      return response?.data;
     },
   });
   const updateMutation = useMutation({
     mutationKey: [key],
     mutationFn: async (data) => {
       const response = await api.put(url, data);
-      return response.data.data;
+      return response.data;
     },
   });
 
@@ -35,7 +35,7 @@ const useApiCall = ({
     mutationKey: [key],
     mutationFn: async (id) => {
       const response = await api.delete(`${url}/${id}`);
-      return response.data.data;
+      return response.data;
     },
   });
 
@@ -43,7 +43,7 @@ const useApiCall = ({
     mutationKey: [key],
     mutationFn: async (data) => {
       const response = await api.patch(url, data);
-      return response.data.data;
+      return response.data;
     },
   });
 

@@ -1,12 +1,11 @@
 import React from "react";
-import { Form, Formik, FormikHelpers } from "formik";
+import { Form, Formik, FormikHelpers, FormikProps } from "formik";
 import {
   examFormFields,
   examInitialValues,
   examSchema,
 } from "../utils/index.utils";
 import CustomInput from "../../../../../component/Form/CustomInput";
-import Button from "../../../../../component/UI/Button";
 import { ExamFormValues } from "../../../../../types/pages.types";
 
 interface ExamFormProps {
@@ -14,9 +13,10 @@ interface ExamFormProps {
     values: ExamFormValues,
     actions: FormikHelpers<ExamFormValues>
   ) => void | Promise<void>;
+  formikRef: React.Ref<FormikProps<ExamFormValues>>;
 }
 
-const ExamForm: React.FC<ExamFormProps> = ({ handleSubmit }) => {
+const ExamForm: React.FC<ExamFormProps> = ({ handleSubmit, formikRef }) => {
   return (
     <React.Fragment>
       <h5 className="text-[20px] font-semibold text-[#21272C]">Add Exam</h5>
@@ -25,6 +25,7 @@ const ExamForm: React.FC<ExamFormProps> = ({ handleSubmit }) => {
       </small>
 
       <Formik
+        innerRef={formikRef}
         initialValues={examInitialValues}
         validationSchema={examSchema}
         onSubmit={handleSubmit}

@@ -8,7 +8,10 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
+    const token = store.getState()?.user?.token;
+    console.log(token);
     config.headers["Content-Type"] = "application/json";
+    config.headers["Authorization"] = `Bearer ${token}`;
     return config;
   },
   (error: unknown) => {
@@ -21,7 +24,7 @@ api.interceptors.response.use(
     return response;
   },
   (error: { status: number }) => {
-    if (error?.status === 401) {
+    if (error?.status === 401 || error?.status === 403) {
       store.dispatch(clearUser());
       window.location.href = "/login";
     }

@@ -3,11 +3,11 @@ import { UserState } from "../../types/store.types";
 
 const initialState: UserState = {
   userDetails: {
-    fullName: "",
+    email: "",
+    name: "",
     role: "",
-     permission: []
   },
-  csrfToken:''
+  token: "",
 };
 
 const UserSlice = createSlice({
@@ -15,10 +15,8 @@ const UserSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action) => {
-      state.userDetails = action.payload;
-    },
-    addToken: (state, action) => {
-      state.csrfToken = action.payload;
+      state.userDetails = action.payload?.admin;
+      state.token = action.payload?.token;
     },
     clearUser: () => {
       return initialState;

@@ -119,7 +119,7 @@ const ViewExam = () => {
     dispatch(changeHeader("Exams"));
   }, [dispatch]);
   return (
-    <section>
+    <section className="mt-[1px]">
       <Header />
       <div className="p-4 flex gap-3">
         <ToatalQestions
