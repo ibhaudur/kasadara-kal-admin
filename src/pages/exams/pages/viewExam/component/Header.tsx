@@ -15,7 +15,7 @@ const details = {
   questionCount: "50",
   attempts: "2",
 };
-const Header = () => {
+const Header = ({ id }: { id: string }) => {
   const navigate = useNavigate();
 
   return (
@@ -89,13 +89,12 @@ const Header = () => {
       <div className="gap-3 flex flex-col items-end">
         <div className="flex gap-3">
           <small className="m-0 cursor-pointer w-[40px] h-[40px] flex justify-center items-center p-2 text-[14px] border bg-white border-[#EBEBEB] rounded-3xl">
-            <HiOutlineTrash  className="text-[18px]"/>
+            <HiOutlineTrash className="text-[18px]" />
           </small>
           <Button
             btnName="Edit"
             splClass="rounded-[30px] h-[40px] text-[15px] px-6"
-            handler={() => navigate('/exams/edit/2')}
-            
+            handler={() => navigate(`/exams/edit/${id}`)}
           />
         </div>
         <p>
