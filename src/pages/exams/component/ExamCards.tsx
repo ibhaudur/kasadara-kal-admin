@@ -6,17 +6,18 @@ import { BiTimeFive } from "react-icons/bi";
 import { IoIosSquare } from "react-icons/io";
 import { ExamDetails } from "../../../types/pages.types";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
-type DetailsProps = { details: ExamDetails; index: number };
+type DetailsProps = { details: ExamDetails };
 
-const ExamCards: React.FC<DetailsProps> = ({ details, index }) => {
+const ExamCards: React.FC<DetailsProps> = ({ details }) => {
   const navigate = useNavigate();
   return (
     <div
-      onClick={() => navigate(`view/${index + 1}`)}
+      onClick={() => navigate(`view/${details.exam_id}`)}
       className="relative bg-white rounded-2xl p-4 shadow-md overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105"
     >
-      {details.type === "free" && (
+      {details.exam_type === "free" && (
         <span className="absolute top-[13px] right-[-25px] w-[100px] text-center bg-[#FFCA60] text-[12px] font-bold px-5 py-1 shadow-sm rotate-45 overflow-hidden">
           FREE
         </span>
@@ -41,27 +42,29 @@ const ExamCards: React.FC<DetailsProps> = ({ details, index }) => {
             )}
             <li
               className={`${
-                details.type === "free" ? "bg-[#EBEBEB]" : "bg-[#FFEFC4]"
+                details.exam_type === "free" ? "bg-[#EBEBEB]" : "bg-[#FFEFC4]"
               } rounded-2xl text-[12px] font-semibold p-1 px-3`}
             >
-              {details.type === "free" ? "Free" : "Paid"}
+              {details.exam_type === "free" ? "Free" : "Paid"}
             </li>
           </ul>
-          {details.type === "paid" && (
-            <strong className="text-[24px] font-extrabold">₹49</strong>
+          {details.exam_type === "paid" && (
+            <strong className="text-[24px] font-extrabold">
+              ₹{details?.discount_cost}
+            </strong>
           )}
         </div>
         <div>
           <h5 className="text-[18px] font-semibold text-[#21272C]">
-            {details.examName}
+            {details.exam_name}
           </h5>
           <small className="text-[#8790A1] flex gap-2 my-3 mb-4 text-[12px] font-medium">
             <span className="flex items-center gap-2">
-              <LuGauge /> {details.mark} marks
+              <LuGauge /> {details.total_marks} marks
             </span>
             |
             <span className="flex items-center gap-2">
-              <PiTimerBold /> {details.hour} hrs
+              <PiTimerBold /> {details.duration} hrs
             </span>
             |
             <span className="flex items-center gap-2">
@@ -74,7 +77,13 @@ const ExamCards: React.FC<DetailsProps> = ({ details, index }) => {
           <div className="mt-5">
             <small className="flex gap-2 items-center">
               <BiTimeFive className="text-[18px] text-[#2BBC7C] font-bold" />
-              Start <b>on 18 Apr, 9:00 AM</b>
+              Start{" "}
+              <b>
+                on{" "}
+                {moment(details.start_datetime)
+                  .local()
+                  .format("DD MMM, h:mm A")}
+              </b>
             </small>
           </div>
         </div>

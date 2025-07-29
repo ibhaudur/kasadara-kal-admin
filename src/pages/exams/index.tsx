@@ -6,64 +6,23 @@ import { FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import SearchBox from "../../component/SearchBox";
 import { MdOutlineSwapVert } from "react-icons/md";
-
-const ExamList = [
-  {
-    examName: "Group 4 Exam - Quick Test - 4",
-    mark: "100",
-    hour: "01:30",
-    questionCount: "50",
-    candidateCount: 80,
-    status: "scheduled",
-    type: "paid",
-  },
-  {
-    examName: "Group 4 Exam - Quick Test - 4",
-    mark: "100",
-    hour: "01:00",
-    questionCount: "50",
-    candidateCount: 130,
-    status: "published",
-    type: "free",
-  },
-  {
-    examName: "Group 4 Exam - Quick Test - 4",
-    mark: "100",
-    hour: "01:30",
-    questionCount: "50",
-    candidateCount: 85,
-    status: "draft",
-    type: "paid",
-    price: "49",
-  },
-  {
-    examName: "Group 4 Exam - Quick Test - 4",
-    mark: "100",
-    hour: "01:00",
-    questionCount: "50",
-    candidateCount: 130,
-    status: "published",
-    type: "free",
-  },
-  {
-    examName: "Group 4 Exam - Quick Test - 4",
-    mark: "100",
-    hour: "01:30",
-    questionCount: "50",
-    candidateCount: 80,
-    status: "scheduled",
-    type: "paid",
-  },
-];
+import useApiCall from "../../hooks/useApiCall";
+import { getAllExams } from "../../service/apiUrls";
+import { ExamDetails } from "../../types/pages.types";
 
 const Exams: React.FC = () => {
   const [active, setActive] = useState<string>("Exams");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { data, refetch, isPending } = useApiCall({
+    key: getAllExams,
+    url: getAllExams,
+    method: "get",
+  });
   useEffect(() => {
     dispatch(changeHeader("Exams"));
   }, [dispatch]);
-
+  console.log(data);
   return (
     <section className="p-4">
       <div className="rounded-[16px] flex justify-between items-center bg-white p-3">
@@ -100,9 +59,7 @@ const Exams: React.FC = () => {
               <li
                 key={item}
                 className={`py-2 px-4 rounded-[12px] text-[12px] cursor-pointer ${
-                  active === item
-                    ? "bg-[#2BBC7C] text-white"
-                    : "bg-white"
+                  active === item ? "bg-[#2BBC7C] text-white" : "bg-white"
                 }`}
                 onClick={() => setActive(item)}
               >
@@ -120,9 +77,10 @@ const Exams: React.FC = () => {
         </div>
       </div>
       <div className="grid grid-cols-3 mt-4 gap-4">
-        {ExamList.map((item, index) => {
-          return <ExamCards key={index} details={item} index={index} />;
-        })}
+        {data &&
+          data?.data?.map((item: ExamDetails, index: number) => {
+            return <ExamCards key={index} details={item} />;
+          })}
       </div>
     </section>
   );

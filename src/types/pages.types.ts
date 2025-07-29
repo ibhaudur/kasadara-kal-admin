@@ -10,14 +10,17 @@ export interface UserDetails extends AuthLogin {
 }
 
 export interface ExamDetails {
-  examName: string;
-  mark: string;
-  hour: string;
+  exam_id: number;
+  exam_name: string;
+  total_marks: string;
+  duration: string;
   questionCount: string;
   candidateCount: number;
   status: "draft" | "published" | "scheduled" | string; // extend as needed
-  type: "free" | "paid" | string;
-  price?: string;
+  exam_type: "free" | "paid" | string;
+  cost?: string;
+  start_datetime: string;
+  discount_cost: string;
 }
 export interface ExamFormValues {
   exam_name: string;
