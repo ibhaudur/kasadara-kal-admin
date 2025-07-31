@@ -22,7 +22,6 @@ const Exams: React.FC = () => {
   useEffect(() => {
     dispatch(changeHeader("Exams"));
   }, [dispatch]);
-  console.log(data);
   return (
     <section className="p-4">
       <div className="rounded-[16px] flex justify-between items-center bg-white p-3">

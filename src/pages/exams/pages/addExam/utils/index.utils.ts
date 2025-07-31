@@ -2,7 +2,7 @@ import * as Yup from "yup";
 import { ExamFormValues } from "../../../../../types/pages.types";
 
 export const examInitialValues: ExamFormValues = {
-  exam_name: "",
+  exam_name: "TNPSC",
   status: "",
   exam_type: "",
   duration: "",

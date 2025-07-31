@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { changeHeader } from "../../store/slice/headerSlice";
 import avt from "../../../public/images/dashboard.svg";
+
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
