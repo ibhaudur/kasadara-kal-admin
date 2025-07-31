@@ -30,7 +30,7 @@ const ExamForm: React.FC<ExamFormProps> = ({ handleSubmit, formikRef }) => {
         validationSchema={examSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {() => (
           <Form className="grid grid-cols-12 gap-4 mt-5">
             {examFormFields.slice(0, 4).map((field, index) => (
               <div

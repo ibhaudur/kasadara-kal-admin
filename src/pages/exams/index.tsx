@@ -14,7 +14,7 @@ const Exams: React.FC = () => {
   const [active, setActive] = useState<string>("Exams");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data, refetch, isPending } = useApiCall({
+  const { data } = useApiCall({
     key: getAllExams,
     url: getAllExams,
     method: "get",

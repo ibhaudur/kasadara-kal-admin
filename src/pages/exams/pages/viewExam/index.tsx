@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 const ViewExam = () => {
   const { id } = useParams();
   const [select, setSelect] = useState<number>(1);
-  const [questions, setQuestions] = useState<QuestionItem[]>([
+  const [questions] = useState<QuestionItem[]>([
     {
       id: 1,
       mark: "2",
