@@ -33,7 +33,7 @@ const Overview = () => {
           <img src={dots} alt="i" />
           <div>
             <p className="text-sm text-[#8790A1] mb-0">Total Amount</p>
-            <p className="text-[20px] font-medium text-[#21272C]">$63,489.50</p>
+            <p className="text-[20px] font-semibold text-[#21272C]">$63,489.50</p>
           </div>
         </div>
         <LineChart />
@@ -46,7 +46,7 @@ const Overview = () => {
           <img src={dots} alt="i" />
           <div>
             <p className="text-sm text-[#8790A1] mb-0">Total candidates</p>
-            <p className="text-[20px] font-medium text-[#21272C]">489</p>
+            <p className="text-[20px] font-semibold text-[#21272C]">489</p>
           </div>
         </div>
         <LineChart />

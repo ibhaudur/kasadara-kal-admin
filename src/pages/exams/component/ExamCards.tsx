@@ -7,6 +7,7 @@ import { IoIosSquare } from "react-icons/io";
 import { ExamDetails } from "../../../types/pages.types";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import { formatMinutesToHours } from "../../../utils/index.utils";
 
 type DetailsProps = { details: ExamDetails };
 
@@ -64,7 +65,7 @@ const ExamCards: React.FC<DetailsProps> = ({ details }) => {
             </span>
             |
             <span className="flex items-center gap-2">
-              <PiTimerBold /> {details.duration} hrs
+              <PiTimerBold /> {formatMinutesToHours(Number(details.duration))}{" "}
             </span>
             |
             <span className="flex items-center gap-2">

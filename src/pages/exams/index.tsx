@@ -75,12 +75,15 @@ const Exams: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-3 mt-4 gap-4">
-        {data &&
-          data?.data?.map((item: ExamDetails, index: number) => {
+      {data?.data?.length > 0 ? (
+        <div className="grid grid-cols-3 mt-4 gap-4">
+          {data?.data?.map((item: ExamDetails, index: number) => {
             return <ExamCards key={index} details={item} />;
           })}
-      </div>
+        </div>
+      ) : (
+        <p className="text-center mt-6">No Data Found!</p>
+      )}
     </section>
   );
 };
