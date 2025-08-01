@@ -29,7 +29,6 @@ const Tiles = () => {
           </p>
           <h5 className="text-[20px] font-medium text-[#2A3547]">467</h5>
         </div>
-
         <div className="col-span-1 bg-white p-4 rounded-2xl">
           <img src={bag} alt="i" />
           <p className="text-[12px] text-[#8790A1] mt-3">

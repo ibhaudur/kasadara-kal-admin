@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { changeHeader } from "../../store/slice/headerSlice";
 import avt from "../../../public/images/dashboard.svg";
 import Tiles from "./component/Tiles";
+import Overview from "./component/Overview";
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Dashboard: React.FC = () => {
         <img src={avt} alt="icon" />
       </div>
       <Tiles />
+      <Overview />
     </section>
   );
 };
