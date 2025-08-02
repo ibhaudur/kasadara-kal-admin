@@ -18,7 +18,7 @@ export const examInitialValues: ExamFormValues = {
 export const examSchema = Yup.object().shape({
   exam_name: Yup.string().required("Exam Name is required"),
   status: Yup.string(),
-  exam_type: Yup.string(),
+  exam_type: Yup.string().required("Exam type is required"),
   duration: Yup.number().required("Duration is required").positive().integer(),
   attempt_per_person: Yup.number()
     .required("Attempt per person is required")
@@ -63,6 +63,7 @@ export const examFormFields = [
       { label: "Paid", value: "paid" },
       { label: "Free", value: "free" },
     ],
+    required: true,
   },
   {
     label: "Attempt per person",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeHeader } from "../../store/slice/headerSlice";
 import ExamCards from "./component/ExamCards";
@@ -12,16 +12,37 @@ import { ExamDetails } from "../../types/pages.types";
 
 const Exams: React.FC = () => {
   const [active, setActive] = useState<string>("Exams");
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { data } = useApiCall({
     key: getAllExams,
     url: getAllExams,
     method: "get",
   });
+
   useEffect(() => {
     dispatch(changeHeader("Exams"));
   }, [dispatch]);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <section className="p-4">
       <div className="rounded-[16px] flex justify-between items-center bg-white p-3">
@@ -31,26 +52,43 @@ const Exams: React.FC = () => {
             Create exams and mock tests easily & manage them in one place.
           </small>
         </div>
-        <div className="relative group inline-block">
-          <button className="bg-[#2BBC7C] rounded-3xl flex items-center gap-2 text-[14px] text-white px-5 py-2">
+
+        <div className="relative inline-block" ref={dropdownRef}>
+          <button
+            onClick={() => setShowDropdown((prev) => !prev)}
+            className="bg-[#2BBC7C] cursor-pointer rounded-3xl flex items-center gap-2 text-[14px] text-white px-5 py-2"
+          >
             Add Exam <FaChevronDown className="text-[12px]" />
           </button>
-          <ul className="absolute right-0 mt-1 w-40 bg-white rounded shadow-xl opacity-0 text-[14px] group-hover:opacity-100 transition-opacity duration-200 z-10">
-            <li
-              onClick={() => navigate("/exams/addExam")}
-              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-            >
-              Exam
-            </li>
-            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-              Quick Test
-            </li>
-            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-              Mock Test
-            </li>
-          </ul>
+
+          {showDropdown && (
+            <ul className="absolute right-0 mt-1 w-40 bg-white rounded shadow-xl text-[14px] z-10">
+              <li
+                onClick={() => {
+                  navigate("/exams/addExam");
+                  setShowDropdown(false);
+                }}
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                Exam
+              </li>
+              <li
+                onClick={() => setShowDropdown(false)}
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                Quick Test
+              </li>
+              <li
+                onClick={() => setShowDropdown(false)}
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                Mock Test
+              </li>
+            </ul>
+          )}
         </div>
       </div>
+
       <div className="flex justify-between items-center mt-5">
         <small className="text-[14px] text-[#172B4D]">
           <ul className="p-0 flex gap-2">
@@ -75,6 +113,7 @@ const Exams: React.FC = () => {
           </div>
         </div>
       </div>
+
       {data?.data?.length > 0 ? (
         <div className="grid grid-cols-3 mt-4 gap-4">
           {data?.data?.map((item: ExamDetails, index: number) => {

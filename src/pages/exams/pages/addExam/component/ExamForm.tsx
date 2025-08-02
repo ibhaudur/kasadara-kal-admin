@@ -47,7 +47,9 @@ const ExamForm: React.FC<ExamFormProps> = ({
 
       <Formik
         innerRef={formikRef}
-        initialValues={formattedDetails ? formattedDetails : examInitialValues}
+        initialValues={
+          id && formattedDetails ? formattedDetails : examInitialValues
+        }
         validationSchema={examSchema}
         onSubmit={handleSubmit}
         enableReinitialize={true}

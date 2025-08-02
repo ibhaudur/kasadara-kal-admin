@@ -41,11 +41,6 @@ const Sidebar: React.FC<{ permission: string[] }> = ({ permission }) => {
                 </li>
               );
             })}
-            {/* <li className="mb-2">
-              <p className="p-2 rounded flex items-center gap-2 mb-0 cursor-pointer hover:bg-gray-700">
-                <LuLogOut /> Logout
-              </p>
-            </li> */}
           </ul>
         </nav>
       </aside>

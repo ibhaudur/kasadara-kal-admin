@@ -7,23 +7,22 @@ const Button: React.FC<Partial<ButtonProps>> = ({
   handler,
   type,
 }) => {
-  if (type === "outline") {
-    return (
-      <button
-        data-testid="button"
-        className={`cursor-pointer rounded-[8px] p-2 ${splClass}`}
-        onClick={handler ? handler : undefined}
-        type="submit"
-      >
-        {btnName}
-      </button>
-    );
-  }
+  const baseClass = "cursor-pointer rounded-[8px] p-2 transition-all";
+  const outlineClass =
+    "border border-[#2BBC7C] text-[#2BBC7C] hover:bg-[#E6F4EF]";
+  const filledClass =
+    "bg-[#2BBC7C] hover:bg-[#0C804D] text-white";
+
+  const finalClass =
+    type === "outline"
+      ? `${baseClass} ${outlineClass} ${splClass || ""}`
+      : `${baseClass} ${filledClass} ${splClass || ""}`;
+
   return (
     <button
       data-testid="button"
-      className={`cursor-pointer bg-[#2BBC7C] hover:bg-[#0C804D] rounded-[8px] text-white p-2 ${splClass}`}
-      onClick={handler ? handler : undefined}
+      className={finalClass}
+      onClick={handler}
       type="submit"
     >
       {btnName}
