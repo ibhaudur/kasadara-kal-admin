@@ -6,18 +6,11 @@ import { LuCalendarDays, LuFileQuestion, LuGauge } from "react-icons/lu";
 import { PiTimerBold } from "react-icons/pi";
 import { TbReload } from "react-icons/tb";
 import { HiOutlineTrash } from "react-icons/hi";
+import { ExamDetails } from "../../../../../types/pages.types";
+import { formatMinutesToHours } from "../../../../../utils/index.utils";
 
-const details = {
-  status: "scheduled",
-  type: "paid",
-  mark: "100",
-  hour: "1.5",
-  questionCount: "50",
-  attempts: "2",
-};
-const Header = ({ id }: { id: string }) => {
+const Header = ({ id, data }: { id: string; data: ExamDetails }) => {
   const navigate = useNavigate();
-
   return (
     <div className="bg-white flex justify-between p-3 z-30 sticky top-0">
       <div className="flex gap-3">
@@ -26,57 +19,57 @@ const Header = ({ id }: { id: string }) => {
           onClick={() => navigate(-1)}
         />
         <div>
-          <p className="flex gap-3">
-            Group 4 Exam - Quick Test - 4
+          <div className="flex gap-3">
+            {data?.exam_name}
             <ul className="flex gap-2">
-              {details.status === "scheduled" && (
+              {data?.status === "scheduled" && (
                 <li className="bg-[#E9EDFF] rounded-2xl text-[12px] flex items-center gap-1 font-semibold p-1 px-3">
                   <IoIosSquare className="text-[#3253EB] text-[14px]" />{" "}
                   Scheduled
                 </li>
               )}
-              {details.status === "published" && (
+              {data?.status === "publish" && (
                 <li className="bg-[#CBFFE8] rounded-2xl text-[12px] flex items-center gap-1 font-semibold p-1 px-3">
                   <IoIosSquare className="text-[#2BBC7C] text-[14px]" />{" "}
                   Published
                 </li>
               )}
-              {details.status === "draft" && (
+              {data?.status === "draft" && (
                 <li className="bg-[#FFE3E5] rounded-2xl text-[12px] flex items-center gap-1 font-semibold p-1 px-3">
                   <IoIosSquare className="text-[#F74D58] text-[14px]" /> Draft
                 </li>
               )}
               <li
                 className={`${
-                  details.type === "free" ? "bg-[#EBEBEB]" : "bg-[#FFEFC4]"
+                  data?.exam_type === "free" ? "bg-[#EBEBEB]" : "bg-[#FFEFC4]"
                 } rounded-2xl text-[12px] font-semibold p-1 px-3`}
               >
-                {details.type === "free" ? "Free" : "Paid"}
+                {data?.exam_type === "free" ? "Free" : "Paid"}
               </li>
             </ul>
-          </p>
+          </div>
           <small className="text-[#8790A1] text-[12px]">
             Created on 23 Oct 2024 at 04:30 PM{" "}
           </small>
           <small className="text-[#21272C] flex gap-2 my-3 mb-4 text-[12px] font-medium">
             <span className="flex items-center gap-2">
               <LuFileQuestion className="text-[#EB7632] text-[13px]" />{" "}
-              {details.questionCount} Questions
+              {data?.questionCount} Questions
             </span>
             |
             <span className="flex items-center gap-2">
               <TbReload className="text-[#6929E2] text-[14px]" />{" "}
-              {details.attempts} Attempts
+              {data?.attempt_per_person} Attempts
             </span>
             |
             <span className="flex items-center gap-2">
               <PiTimerBold className="text-[#2BBC7C] text-[14px]" />{" "}
-              {details.hour} hrs
+              {formatMinutesToHours(Number(data?.duration))} hrs
             </span>
             |
             <span className="flex items-center gap-2">
-              <LuGauge className="text-[#FF4444] text-[14px]" /> {details.mark}{" "}
-              marks
+              <LuGauge className="text-[#FF4444] text-[14px]" />{" "}
+              {data?.total_marks} marks
             </span>
             |
             <span className="flex items-center gap-2">
@@ -99,7 +92,8 @@ const Header = ({ id }: { id: string }) => {
         </div>
         <p>
           <strong className="text-[24px] font-extrabold">
-            ₹49<small className="text-[#8790A1]">/</small>&nbsp;
+            ₹{parseInt(data?.discount_cost)}
+            <small className="text-[#8790A1]">/</small>&nbsp;
             <small className="text-[#8790A1] text-[14px] font-light">
               Candidate
             </small>

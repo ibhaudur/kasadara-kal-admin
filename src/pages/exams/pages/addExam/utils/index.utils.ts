@@ -2,7 +2,7 @@ import * as Yup from "yup";
 import { ExamFormValues } from "../../../../../types/pages.types";
 
 export const examInitialValues: ExamFormValues = {
-  exam_name: "TNPSC",
+  exam_name: "",
   status: "",
   exam_type: "",
   duration: "",
@@ -27,8 +27,17 @@ export const examSchema = Yup.object().shape({
     .required("Total Marks is required")
     .positive()
     .integer(),
-  cost: Yup.number().required("Cost is required").min(0),
-  discount_cost: Yup.number().required("Discount Cost is required").min(0),
+  cost: Yup.number().when("exam_type", {
+    is: (val: string) => val !== "free",
+    then: (schema) => schema.required("Cost is required").min(0),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  discount_cost: Yup.number().when("exam_type", {
+    is: (val: string) => val !== "free",
+    then: (schema) => schema.required("Discount Cost is required").min(0),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+
   start_datetime: Yup.date().required("Exam Start Date is required"),
   examStartTime: Yup.string().required("Exam Start Time is required"),
   valid_until: Yup.date().required("Validity Date is required"),
@@ -45,18 +54,15 @@ export const examFormFields = [
     required: true,
   },
   {
-    label: "Status",
-    name: "status",
-    type: "text",
-    placeholder: "Enter Status",
-    testId: "status-input",
-  },
-  {
     label: "Exam Type",
     name: "exam_type",
-    type: "text",
-    placeholder: "Enter Exam Type",
+    type: "select",
+    placeholder: "Select Exam Type",
     testId: "exam-type-input",
+    options: [
+      { label: "Paid", value: "paid" },
+      { label: "Free", value: "free" },
+    ],
   },
   {
     label: "Attempt per person",
@@ -105,6 +111,7 @@ export const examFormFields = [
     placeholder: "Select Start Date",
     testId: "start-date-input",
     required: true,
+    dateAttribute: "min",
   },
   {
     label: "Exam Start Time",
@@ -121,6 +128,7 @@ export const examFormFields = [
     placeholder: "Select Validity Date",
     testId: "validity-date-input",
     required: true,
+    dateAttribute: "min",
   },
   {
     label: "Validity Time",

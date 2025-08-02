@@ -21,6 +21,7 @@ export interface ExamDetails {
   cost?: string;
   start_datetime: string;
   discount_cost: string;
+  attempt_per_person: string;
 }
 export interface ExamFormValues {
   exam_name: string;

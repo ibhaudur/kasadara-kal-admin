@@ -1,5 +1,11 @@
 import React from "react";
-import { Form, Formik, FormikHelpers, FormikProps } from "formik";
+import {
+  Formik,
+  Form,
+  FormikHelpers,
+  FormikProps,
+  useFormikContext,
+} from "formik";
 import {
   examFormFields,
   examInitialValues,
@@ -7,6 +13,8 @@ import {
 } from "../utils/index.utils";
 import CustomInput from "../../../../../component/Form/CustomInput";
 import { ExamFormValues } from "../../../../../types/pages.types";
+import { useParams } from "react-router-dom";
+import { formatDateOnly } from "../../../../../utils/index.utils";
 
 interface ExamFormProps {
   handleSubmit: (
@@ -14,43 +22,78 @@ interface ExamFormProps {
     actions: FormikHelpers<ExamFormValues>
   ) => void | Promise<void>;
   formikRef: React.Ref<FormikProps<ExamFormValues>>;
+  details: ExamFormValues;
 }
 
-const ExamForm: React.FC<ExamFormProps> = ({ handleSubmit, formikRef }) => {
+const ExamForm: React.FC<ExamFormProps> = ({
+  handleSubmit,
+  formikRef,
+  details,
+}) => {
+  const { id } = useParams();
+  const formattedDetails = {
+    ...details,
+    start_datetime: formatDateOnly(details?.start_datetime),
+    valid_until: formatDateOnly(details?.valid_until),
+  };
   return (
-    <React.Fragment>
-      <h5 className="text-[20px] font-semibold text-[#21272C]">Add Exam</h5>
+    <>
+      <h5 className="text-[20px] font-semibold text-[#21272C]">
+        {id ? "Edit" : "Add"} Exam
+      </h5>
       <small className="text-[#21272C]">
-        Enter below details & questions to create new exam
+        Enter below details & questions to {id ? "update" : "create new"} exam
       </small>
 
       <Formik
         innerRef={formikRef}
-        initialValues={examInitialValues}
+        initialValues={formattedDetails ? formattedDetails : examInitialValues}
         validationSchema={examSchema}
         onSubmit={handleSubmit}
+        enableReinitialize={true}
       >
-        {() => (
-          <Form className="grid grid-cols-12 gap-4 mt-5">
-            {examFormFields.slice(0, 4).map((field, index) => (
-              <div
-                key={index}
-                className={index === 0 ? "col-span-6" : "col-span-2"}
-              >
-                <CustomInput {...field} />
-              </div>
-            ))}
-            <div className="col-span-12 grid grid-cols-8 gap-3">
-              {examFormFields.slice(4, 12).map((field, index) => (
-                <div key={index}>
-                  <CustomInput {...field} />
-                </div>
-              ))}
-            </div>
-          </Form>
-        )}
+        {() => <FormFields />}
       </Formik>
-    </React.Fragment>
+    </>
+  );
+};
+
+const FormFields: React.FC = () => {
+  const { values } = useFormikContext<ExamFormValues>();
+  const examType = values.exam_type;
+
+  return (
+    <Form className="grid grid-cols-12 gap-4 mt-5">
+      {examFormFields.slice(0, 3).map((field, index) => (
+        <div
+          key={field.name}
+          className={index === 0 ? "col-span-6" : "col-span-3"}
+        >
+          <CustomInput {...field} />
+        </div>
+      ))}
+
+      <div
+        className={`col-span-12 grid ${
+          examType === "free" ? "grid-cols-6" : "grid-cols-8"
+        } gap-3`}
+      >
+        {examFormFields.slice(3, 12).map((field) => {
+          if (
+            examType === "free" &&
+            (field.name === "cost" || field.name === "discount_cost")
+          ) {
+            return null;
+          }
+
+          return (
+            <div key={field.name}>
+              <CustomInput {...field} />
+            </div>
+          );
+        })}
+      </div>
+    </Form>
   );
 };
 

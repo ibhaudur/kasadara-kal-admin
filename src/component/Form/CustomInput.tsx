@@ -23,7 +23,9 @@ const CustomInput: React.FC<CustomInputProps> = ({
   const isError = name && touched[name] && errors[name];
 
   const getInputClasses = () =>
-    `w-full px-3 py-2 border rounded-[10px] border-[#D4DDE7] focus:outline-none focus:ring-2 placeholder:text-[12px] text-[13px] focus:ring-[#2BBC7C] ${isError ? 'border-red-500' : ''} ${splClass}`;
+    `w-full px-3 py-2 border rounded-[10px] border-[#D4DDE7] focus:outline-none focus:ring-2 placeholder:text-[12px] text-[13px] focus:ring-[#2BBC7C] ${
+      isError ? "border-red-500" : ""
+    } ${splClass}`;
 
   const renderFields = () => {
     if (!name) return null;
@@ -37,7 +39,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
             id={name}
             data-testid={testId}
             disabled={disabled}
-            className={`w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#6243cc] ${isError ? 'border-red-500' : ''} ${splClass}`}
+            className={`${getInputClasses()}`}
           >
             <option value="" disabled>
               {placeholder}
@@ -45,10 +47,12 @@ const CustomInput: React.FC<CustomInputProps> = ({
             {parameter
               ? optionsList?.[parameter]?.map((option) => (
                   <option
-                    key={keyValue ? option?.[keyValue] as string : ""}
-                    value={keyValue ? option?.[keyValue] as string : ""}
+                    key={keyValue ? (option?.[keyValue] as string) : ""}
+                    value={keyValue ? (option?.[keyValue] as string) : ""}
                   >
-                    {labelValue ? option?.[labelValue as string] as ReactNode : ""}
+                    {labelValue
+                      ? (option?.[labelValue as string] as ReactNode)
+                      : ""}
                   </option>
                 ))
               : options?.map((option) => (
@@ -98,8 +102,16 @@ const CustomInput: React.FC<CustomInputProps> = ({
             id={name}
             data-testid={testId}
             placeholder={placeholder}
-            min={dateAttribute === "min" ? new Date(Date.now() + 86400000).toISOString().split("T")[0] : ""}
-            max={dateAttribute === "max" ? new Date().toISOString().split("T")[0] : ""}
+            min={
+              dateAttribute === "min"
+                ? new Date(Date.now() + 86400000).toISOString().split("T")[0]
+                : ""
+            }
+            max={
+              dateAttribute === "max"
+                ? new Date().toISOString().split("T")[0]
+                : ""
+            }
             disabled={disabled}
             className={`${getInputClasses()}`}
           />

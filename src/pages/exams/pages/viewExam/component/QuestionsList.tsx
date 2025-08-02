@@ -51,7 +51,7 @@ const QuestionsList: React.FC<QuestionsListProps> = ({ questions, select }) => {
       </ul>
       <div>
         <h5 className="text-[20px] font-semibold mt-3">Questions</h5>
-        {questions.map((item) => {
+        {questions?.map((item) => {
           const q = item[language.toLowerCase() as "english" | "tamil"];
           const answerKey = q.answer as keyof typeof q.options;
 

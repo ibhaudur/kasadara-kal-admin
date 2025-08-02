@@ -31,7 +31,7 @@ const ExamCards: React.FC<DetailsProps> = ({ details }) => {
                 <IoIosSquare className="text-[#3253EB] text-[14px]" /> Scheduled
               </li>
             )}
-            {details.status === "published" && (
+            {details.status === "publish" && (
               <li className="bg-[#CBFFE8] rounded-2xl text-[12px] flex items-center gap-1 font-semibold p-1 px-3">
                 <IoIosSquare className="text-[#2BBC7C] text-[14px]" /> Published
               </li>

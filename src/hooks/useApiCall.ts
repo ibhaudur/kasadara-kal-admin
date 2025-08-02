@@ -6,6 +6,7 @@ const useApiCall = ({
   key,
   url,
   method,
+  enabled,
 }: IApiCall): UseQueryResult<unknown, Error> | any => {
   const query = useQuery({
     queryKey: [key],
@@ -13,7 +14,7 @@ const useApiCall = ({
       const response = await api.get(url);
       return response.data;
     },
-    enabled: method === "get",
+    enabled: method === "get" && enabled !== false,
   });
 
   const mutation = useMutation({
@@ -57,8 +58,6 @@ const useApiCall = ({
     return deleteMutation;
   } else if (method === "patch") {
     return patchMutation;
-  } else {
-    throw new Error(`Unsupported method: ${method}`);
   }
 };
 

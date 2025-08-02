@@ -7,3 +7,13 @@ export const formatMinutesToHours = (minutes: number) => {
   return `${hours}h ${mins}m`;
 };
 
+export const formatDateOnly = (value: string) => {
+  if (!value) return "";
+  return new Date(value).toISOString().split("T")[0]; // "YYYY-MM-DD"
+};
+
+export const formatTime = (isoString: string) => {
+  if (!isoString) return "";
+  const date = new Date(isoString);
+  return date.toISOString().substr(11, 5); // "HH:mm"
+};
