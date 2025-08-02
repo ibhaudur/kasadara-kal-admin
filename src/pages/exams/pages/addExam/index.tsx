@@ -88,6 +88,7 @@ const AddExam = () => {
             type="outline"
             btnName="Cancel"
             splClass="rounded-[30px] text-[15px] border border-[#D4DDE7] px-3 text-black"
+            handler={() => navigate(-1)}
           />
           <Button
             type="outline"

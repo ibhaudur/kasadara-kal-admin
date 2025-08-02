@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import Button from "../../component/UI/Button";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../../store/slice/userSlice";
 
 interface HeaderProps {
   pageName: string;
@@ -11,7 +14,8 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ pageName, userName, userEmail }) => {
   const [showPopup, setShowPopup] = useState(false);
   const avatarRef = useRef<HTMLDivElement>(null);
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const togglePopup = () => {
     setShowPopup((prev) => !prev);
   };
@@ -22,12 +26,11 @@ const Header: React.FC<HeaderProps> = ({ pageName, userName, userEmail }) => {
         avatarRef.current &&
         !avatarRef.current.contains(event.target as Node)
       ) {
-        setShowPopup(false);
+        setTimeout(() => setShowPopup(false), 100);
       }
     };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mouseup", handleClickOutside);
+    return () => document.removeEventListener("mouseup", handleClickOutside);
   }, []);
 
   return (
@@ -59,6 +62,10 @@ const Header: React.FC<HeaderProps> = ({ pageName, userName, userEmail }) => {
                   btnName="Logout"
                   splClass="rounded-[60px] py-1 px-6 mt-3"
                   type="outline"
+                  handler={() => {
+                    navigate("/login");
+                    dispatch(clearUser());
+                  }}
                 />
               </div>
             </div>,
