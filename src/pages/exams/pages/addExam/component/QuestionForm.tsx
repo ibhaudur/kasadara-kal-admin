@@ -45,7 +45,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({
       </ul>
       <label className="flex text-[12px] mb-1">Answer</label>
       <select
-        value={q.answer}
+        value={q.answer.toUpperCase()}
         onChange={(e) =>
           handleChange(select, language, "answer", e.target.value)
         }

@@ -39,9 +39,9 @@ export const examSchema = Yup.object().shape({
   }),
 
   start_datetime: Yup.date().required("Exam Start Date is required"),
-  examStartTime: Yup.string().required("Exam Start Time is required"),
+  // examStartTime: Yup.string().required("Exam Start Time is required"),
   valid_until: Yup.date().required("Validity Date is required"),
-  validityTime: Yup.string().required("Validity Time is required"),
+  // validityTime: Yup.string().required("Validity Time is required"),
 });
 
 export const examFormFields = [
@@ -120,7 +120,7 @@ export const examFormFields = [
     type: "time",
     placeholder: "Select Start Time",
     testId: "start-time-input",
-    required: true,
+    // required: true,
   },
   {
     label: "Validity Date",
@@ -137,6 +137,6 @@ export const examFormFields = [
     type: "time",
     placeholder: "Select Validity Time",
     testId: "validity-time-input",
-    required: true,
+    // required: true,
   },
 ];
