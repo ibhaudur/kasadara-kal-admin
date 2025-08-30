@@ -9,11 +9,11 @@ export const examInitialValues: ExamFormValues = {
   total_marks: "",
   cost: "",
   discount_cost: "",
-  start_datetime: "",
+  exam_start_date: "",
   attempt_per_person: "",
-  examStartTime: "",
-  valid_until: "",
-  validityTime: "",
+  exam_start_time: "",
+  exam_validity_date: "",
+  exam_validity_time: "",
 };
 export const examSchema = Yup.object().shape({
   exam_name: Yup.string().required("Exam Name is required"),
@@ -38,10 +38,10 @@ export const examSchema = Yup.object().shape({
     otherwise: (schema) => schema.notRequired(),
   }),
 
-  start_datetime: Yup.date().required("Exam Start Date is required"),
-  // examStartTime: Yup.string().required("Exam Start Time is required"),
-  valid_until: Yup.date().required("Validity Date is required"),
-  // validityTime: Yup.string().required("Validity Time is required"),
+  exam_start_date: Yup.date().required("Exam Start Date is required"),
+  exam_start_time: Yup.string().required("Exam Start Time is required"),
+  exam_validity_date: Yup.date().required("Validity Date is required"),
+  exam_validity_time: Yup.string().required("Validity Time is required"),
 });
 
 export const examFormFields = [
@@ -107,7 +107,7 @@ export const examFormFields = [
   },
   {
     label: "Exam Start Date",
-    name: "start_datetime",
+    name: "exam_start_date",
     type: "date",
     placeholder: "Select Start Date",
     testId: "start-date-input",
@@ -116,15 +116,15 @@ export const examFormFields = [
   },
   {
     label: "Exam Start Time",
-    name: "examStartTime",
+    name: "exam_start_time",
     type: "time",
     placeholder: "Select Start Time",
     testId: "start-time-input",
-    // required: true,
+    required: true,
   },
   {
     label: "Validity Date",
-    name: "valid_until",
+    name: "exam_validity_date",
     type: "date",
     placeholder: "Select Validity Date",
     testId: "validity-date-input",
@@ -133,10 +133,10 @@ export const examFormFields = [
   },
   {
     label: "Validity Time",
-    name: "validityTime",
+    name: "exam_validity_time",
     type: "time",
     placeholder: "Select Validity Time",
     testId: "validity-time-input",
-    // required: true,
+    required: true,
   },
 ];

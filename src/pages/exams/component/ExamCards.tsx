@@ -69,7 +69,7 @@ const ExamCards: React.FC<DetailsProps> = ({ details }) => {
             </span>
             |
             <span className="flex items-center gap-2">
-              <LuFileQuestion /> {details.questionCount} Questions
+              <LuFileQuestion /> {details.questions_count} Questions
             </span>
           </small>
           <i className="bg-[#F4ECFF] text-[12px] font-semibold py-1 px-3 rounded-3xl">

@@ -13,10 +13,12 @@ import { ApiError, ApiResponse } from "../../../../types/apiservice.types";
 import {
   getExamById,
   postAddExam,
+  postBulkUpload,
   putEditExam,
 } from "../../../../service/apiUrls";
 import useApiCall from "../../../../hooks/useApiCall";
-const initialValues = {
+
+const initialValues: QuestionItem = {
   id: 1,
   mark: "",
   english: {
@@ -37,42 +39,68 @@ const AddExam = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [questions, setQuestions] = useState<QuestionItem[]>([initialValues]);
+  const [file, setFile] = useState<File | null>(null);
+
   const formikRef = useRef<FormikProps<ExamFormValues>>(null);
+
   const { data } = useApiCall({
     key: `getExamById/${id}`,
     url: `${getExamById}/${id}`,
     method: "get",
     enabled: Boolean(id),
   });
+
   useEffect(() => {
     dispatch(changeHeader("Exams"));
     setQuestions(data?.questions || [initialValues]);
   }, [dispatch, data]);
+
   const { mutate } = useApiCall({
-    key: id ? `${putEditExam}/${id}` : postAddExam,
-    url: id ? `${putEditExam}/${id}` : postAddExam,
+    key: id ? `${putEditExam}/${id}` : file ? postBulkUpload : postAddExam,
+    url: id ? `${putEditExam}/${id}` : file ? postBulkUpload : postAddExam,
     method: id ? "put" : "post",
   });
+  const createBulkData = (
+    values: ExamFormValues,
+    file: File | null
+  ): FormData => {
+    const formData = new FormData();
+
+    if (file) {
+      formData.append("file", file);
+    }
+    Object.entries(values).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        formData.append(key, value);
+      }
+    });
+
+    return formData;
+  };
+
   const handleSubmit = async (
     values: ExamFormValues,
     actions: FormikHelpers<ExamFormValues>
   ) => {
-    const data = { examData: values, questions: questions };
-    mutate(data, {
+    const data = { examData: values, questions };
+
+    const bulkData = createBulkData(values, file);
+
+    mutate(file ? bulkData : data, {
       onSuccess: (res: ApiResponse<any>) => {
         actions.setSubmitting(false);
-        console.log(res);
         toast.success(res?.message);
         navigate(-1);
       },
       onError: (err: ApiError) => {
-        console.log(err);
         actions.setSubmitting(false);
         toast.error(err.response?.data?.message);
       },
     });
   };
+
   return (
     <section className="mt-[1px]">
       <div className="bg-white flex justify-between p-3 z-30 sticky top-0">
@@ -118,7 +146,11 @@ const AddExam = () => {
           />
         </div>
         <div className="p-4 bg-white rounded-2xl">
-          <QuestionsForm questions={questions} setQuestions={setQuestions} />
+          <QuestionsForm
+            setFile={setFile}
+            questions={questions}
+            setQuestions={setQuestions}
+          />
         </div>
       </div>
     </section>

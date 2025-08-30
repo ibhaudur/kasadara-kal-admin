@@ -3,14 +3,12 @@ import { store } from "../store/store";
 import { clearUser } from "../store/slice/userSlice";
 
 const api = axios.create({
-  baseURL: "http://3.110.42.33:3000/api/",
+  baseURL: "https://api.kasadarakal.com/api/",
 });
 
 api.interceptors.request.use(
   (config) => {
     const token = store.getState()?.user?.token;
-    console.log(token);
-    config.headers["Content-Type"] = "application/json";
     config.headers["Authorization"] = `Bearer ${token}`;
     return config;
   },

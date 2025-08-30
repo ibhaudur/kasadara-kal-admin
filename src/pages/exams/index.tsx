@@ -20,7 +20,7 @@ const Exams: React.FC = () => {
 
   const { data } = useApiCall({
     key: getAllExams,
-    url: getAllExams,
+    url: `${getAllExams}?search=`,
     method: "get",
   });
 

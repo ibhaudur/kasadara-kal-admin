@@ -51,20 +51,20 @@ const QuestionsList: React.FC<QuestionsListProps> = ({ questions, select }) => {
       </ul>
       <div>
         <h5 className="text-[20px] font-semibold mt-3">Questions</h5>
-        {questions?.map((item) => {
+        {questions?.map((item, index) => {
           const q = item[language.toLowerCase() as "english" | "tamil"];
           const answerKey = q.answer as keyof typeof q.options;
 
           return (
             <div
               ref={(el) => {
-                questionRefs.current[item.id] = el;
+                questionRefs.current[index + 1] = el;
               }}
               key={item.id}
               className="my-3 border-b border-b-[#E5E5E5] py-3 last:border-b-0 scroll-mt-30"
             >
               <p className="font-bold text-[15px]">
-                {item.id}. {q.question}
+                {index + 1}. {q.question}
               </p>
               <ul className="p-3">
                 {(["A", "B", "C", "D"] as const).map((key) => (

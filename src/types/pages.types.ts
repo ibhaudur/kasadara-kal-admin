@@ -14,7 +14,7 @@ export interface ExamDetails {
   exam_name: string;
   total_marks: string;
   duration: string;
-  questionCount: string;
+  questions_count: string;
   candidateCount: number;
   status: "draft" | "published" | "scheduled" | string; // extend as needed
   exam_type: "free" | "paid" | string;
@@ -31,10 +31,10 @@ export interface ExamFormValues {
   total_marks: string;
   cost: string;
   discount_cost: string;
-  start_datetime: string;
-  examStartTime: string;
-  valid_until: string;
-  validityTime: string;
+  exam_start_date: string;
+  exam_start_time: string;
+  exam_validity_date: string;
+  exam_validity_time: string;
   attempt_per_person: string;
 }
 export interface Question {
@@ -74,4 +74,5 @@ export interface StepsProps {
 export interface QuestionsStateProps {
   questions: QuestionItem[];
   setQuestions: React.Dispatch<React.SetStateAction<QuestionItem[]>>;
+  setFile: (file: File | null) => void;
 }

@@ -54,7 +54,7 @@ const Header = ({ id, data }: { id: string; data: ExamDetails }) => {
           <small className="text-[#21272C] flex gap-2 my-3 mb-4 text-[12px] font-medium">
             <span className="flex items-center gap-2">
               <LuFileQuestion className="text-[#EB7632] text-[13px]" />{" "}
-              {data?.questionCount} Questions
+              {data?.questions_count} Questions
             </span>
             |
             <span className="flex items-center gap-2">
@@ -84,11 +84,13 @@ const Header = ({ id, data }: { id: string; data: ExamDetails }) => {
           <small className="m-0 cursor-pointer w-[40px] h-[40px] flex justify-center items-center p-2 text-[14px] border bg-white border-[#EBEBEB] rounded-3xl">
             <HiOutlineTrash className="text-[18px]" />
           </small>
-          <Button
-            btnName="Edit"
-            splClass="rounded-[30px] h-[40px] text-[15px] px-6"
-            handler={() => navigate(`/exams/edit/${id}`)}
-          />
+          {data?.status !== "publish" && (
+            <Button
+              btnName="Edit"
+              splClass="rounded-[30px] h-[40px] text-[15px] px-6"
+              handler={() => navigate(`/exams/edit/${id}`)}
+            />
+          )}
         </div>
         <p>
           <strong className="text-[24px] font-extrabold">

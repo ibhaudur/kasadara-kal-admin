@@ -8,10 +8,9 @@ import Steps from "./Steps";
 import QuestionForm from "./QuestionForm";
 import { FaRegTrashCan } from "react-icons/fa6";
 
-const CreateQuestions: React.FC<QuestionsStateProps> = ({
-  questions,
-  setQuestions,
-}) => {
+const CreateQuestions: React.FC<
+  Pick<QuestionsStateProps, "questions" | "setQuestions">
+> = ({ questions, setQuestions }) => {
   const [select, setSelect] = useState<number>(0);
 
   const handleChange = (
