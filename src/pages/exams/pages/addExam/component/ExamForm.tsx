@@ -14,7 +14,6 @@ import {
 import CustomInput from "../../../../../component/Form/CustomInput";
 import { ExamFormValues } from "../../../../../types/pages.types";
 import { useParams } from "react-router-dom";
-import { formatDateOnly } from "../../../../../utils/index.utils";
 
 interface ExamFormProps {
   handleSubmit: (
@@ -31,11 +30,6 @@ const ExamForm: React.FC<ExamFormProps> = ({
   details,
 }) => {
   const { id } = useParams();
-  const formattedDetails = {
-    ...details,
-    start_datetime: formatDateOnly(details?.start_datetime),
-    valid_until: formatDateOnly(details?.valid_until),
-  };
   return (
     <>
       <h5 className="text-[20px] font-semibold text-[#21272C]">
@@ -47,9 +41,7 @@ const ExamForm: React.FC<ExamFormProps> = ({
 
       <Formik
         innerRef={formikRef}
-        initialValues={
-          id && formattedDetails ? formattedDetails : examInitialValues
-        }
+        initialValues={id && details ? details : examInitialValues}
         validationSchema={examSchema}
         onSubmit={handleSubmit}
         enableReinitialize={true}
