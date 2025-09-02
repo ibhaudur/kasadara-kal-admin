@@ -15,7 +15,7 @@ export interface ExamDetails {
   total_marks: string;
   duration: string;
   questions_count: string;
-  candidateCount: number;
+  candidate_registered: number;
   status: "draft" | "published" | "scheduled" | string; // extend as needed
   exam_type: "free" | "paid" | string;
   cost?: string;
