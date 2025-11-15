@@ -30,7 +30,6 @@ const Login: React.FC = () => {
     values: AuthLogin,
     actions: FormikHelpers<AuthLogin>
   ) => {
-    console.log(values, actions);
     mutate(values, {
       onSuccess: (res: ApiResponse<AuthLogin>) => {
         actions.setSubmitting(false);
@@ -39,7 +38,6 @@ const Login: React.FC = () => {
         dispatch(addUser(res));
       },
       onError: (err: ApiError) => {
-        console.log(err);
         actions.setSubmitting(false);
         toast.error(err.response?.data?.message);
       },

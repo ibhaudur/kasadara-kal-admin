@@ -9,7 +9,6 @@ import Button from "../../../component/UI/Button";
 
 const ReportForm = () => {
   const handleSubmit = () => {
-    console.log("ss");
   };
   return (
     <div className="bg-[#F7F7F7] p-4 col-span-6 md:col-span-6 lg:col-span-4 rounded-2xl">

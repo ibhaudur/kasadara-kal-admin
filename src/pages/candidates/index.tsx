@@ -1,11 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeHeader } from "../../store/slice/headerSlice";
 import SearchBox from "../../component/SearchBox";
 import { MdOutlineSwapVert } from "react-icons/md";
 import CandidateList from "./components/CandidateList";
+import useDebounce from "../../hooks/useDebounce";
+import { getCandidatesList } from "../../service/apiUrls";
+import useApiCall from "../../hooks/useApiCall";
+import Pagination from "../../component/UI/Pagination";
 
 const Candidates: React.FC = () => {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [filter, setFilter] = useState({ search: "" });
+  const debouncedSearch = useDebounce(filter.search, 500);
+  const url = getCandidatesList
+    .replace(":page", String(page))
+    .replace(":limit", String(limit))
+    .replace(":search", debouncedSearch);
+  const { data } = useApiCall({
+    key: url,
+    url: url,
+    method: "get",
+  });
+  const pagination = data?.data?.pagination;
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(changeHeader("Candidates"));
@@ -21,17 +40,27 @@ const Candidates: React.FC = () => {
       </div>
       <div className="flex justify-between items-center mt-5">
         <small className="text-[14px] text-[#172B4D]">
-          Total Candidates: 400
+          Total Candidates: {pagination?.totalItems || 0}
         </small>
         <div className="flex gap-3">
-          <SearchBox />
-          <div className="flex items-center w-[100%] px-4 text-[#172B4D] h-[40px] bg-white rounded-[14px] border-[0.6px] border-[#DCDFE4] text-sm">
-            <MdOutlineSwapVert className="text-[20px]" /> &nbsp; Default (date
-            created)
-          </div>
+          <SearchBox
+            OnChange={(e) =>
+              setFilter((prev) => ({ ...prev, search: e.target.value }))
+            }
+          />
         </div>
       </div>
-      <CandidateList />
+      <CandidateList list={data?.data?.candidates} />
+      <Pagination
+        page={page}
+        limit={limit}
+        total={pagination ? pagination.totalPages : 0}
+        onPageChange={(p) => setPage(p)}
+        onLimitChange={(l) => {
+          setLimit(l);
+          setPage(1); // reset to 1 when limit changes
+        }}
+      />
     </section>
   );
 };
