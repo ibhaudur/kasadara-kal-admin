@@ -58,10 +58,10 @@ const FormFields: React.FC = () => {
 
   return (
     <Form className="grid grid-cols-12 gap-4 mt-5">
-      {examFormFields.slice(0, 3).map((field, index) => (
+      {examFormFields.slice(0, 4).map((field, index) => (
         <div
           key={field.name}
-          className={index === 0 ? "col-span-6" : "col-span-3"}
+          className={index === 0 ? "col-span-6" : "col-span-2"}
         >
           <CustomInput {...field} />
         </div>
@@ -72,7 +72,7 @@ const FormFields: React.FC = () => {
           examType === "free" ? "grid-cols-6" : "grid-cols-8"
         } gap-3`}
       >
-        {examFormFields.slice(3, 12).map((field) => {
+        {examFormFields.slice(4, 12).map((field) => {
           if (
             examType === "free" &&
             (field.name === "cost" || field.name === "discount_cost")

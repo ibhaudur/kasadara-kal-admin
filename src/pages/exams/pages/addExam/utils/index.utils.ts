@@ -5,6 +5,7 @@ export const examInitialValues: ExamFormValues = {
   exam_name: "",
   status: "",
   exam_type: "",
+  exam_category: "",
   duration: "",
   total_marks: "",
   cost: "",
@@ -71,6 +72,19 @@ export const examFormFields = [
     type: "number",
     placeholder: "Enter count",
     testId: "attempt-input",
+    required: true,
+  },
+  {
+    label: "Exam Category",
+    name: "exam_category",
+    type: "select",
+    placeholder: "Select Exam Category",
+    testId: "exam-category-input",
+    options: [
+      { label: "Group 4", value: "group 4" },
+      { label: "Group 2A Mains", value: "group 2a mains" },
+      { label: "Group 1 Prelims", value: "group 1 prelims" },
+    ],
     required: true,
   },
   {

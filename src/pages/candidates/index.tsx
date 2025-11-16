@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeHeader } from "../../store/slice/headerSlice";
 import SearchBox from "../../component/SearchBox";
-import { MdOutlineSwapVert } from "react-icons/md";
 import CandidateList from "./components/CandidateList";
 import useDebounce from "../../hooks/useDebounce";
 import { getCandidatesList } from "../../service/apiUrls";

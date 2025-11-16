@@ -5,9 +5,11 @@ import Button from "../../../../../component/UI/Button";
 import { LuCalendarDays, LuFileQuestion, LuGauge } from "react-icons/lu";
 import { PiTimerBold } from "react-icons/pi";
 import { TbReload } from "react-icons/tb";
-import { HiOutlineTrash } from "react-icons/hi";
 import { ExamDetails } from "../../../../../types/pages.types";
-import { formatMinutesToHours } from "../../../../../utils/index.utils";
+import {
+  formatDate,
+  formatMinutesToHours,
+} from "../../../../../utils/index.utils";
 
 const Header = ({ id, data }: { id: string; data: ExamDetails }) => {
   const navigate = useNavigate();
@@ -49,7 +51,7 @@ const Header = ({ id, data }: { id: string; data: ExamDetails }) => {
             </ul>
           </div>
           <small className="text-[#8790A1] text-[12px]">
-            Created on 23 Oct 2024 at 04:30 PM{" "}
+            Created on {formatDate(data?.created_on)}{" "}
           </small>
           <small className="text-[#21272C] flex gap-2 my-3 mb-4 text-[12px] font-medium">
             <span className="flex items-center gap-2">
@@ -71,19 +73,24 @@ const Header = ({ id, data }: { id: string; data: ExamDetails }) => {
               <LuGauge className="text-[#FF4444] text-[14px]" />{" "}
               {data?.total_marks} marks
             </span>
-            |
-            <span className="flex items-center gap-2">
-              <LuCalendarDays className="text-[#3253EB] text-[14px]" />{" "}
-              Published on <b>25th Oct</b> at<b> 05:30 PM - 06:30 PM</b>
-            </span>
+            {data?.published_on && (
+              <>
+                {" "}
+                |
+                <span className="flex items-center gap-2">
+                  <LuCalendarDays className="text-[#3253EB] text-[14px]" />{" "}
+                  Published on <b>{formatDate(data?.published_on)}</b>
+                </span>
+              </>
+            )}
           </small>
         </div>
       </div>
       <div className="gap-3 flex flex-col items-end">
         <div className="flex gap-3">
-          <small className="m-0 cursor-pointer w-[40px] h-[40px] flex justify-center items-center p-2 text-[14px] border bg-white border-[#EBEBEB] rounded-3xl">
+          {/* <small className="m-0 cursor-pointer w-[40px] h-[40px] flex justify-center items-center p-2 text-[14px] border bg-white border-[#EBEBEB] rounded-3xl">
             <HiOutlineTrash className="text-[18px]" />
-          </small>
+          </small> */}
           {data?.status !== "publish" && (
             <Button
               btnName="Edit"
@@ -94,7 +101,7 @@ const Header = ({ id, data }: { id: string; data: ExamDetails }) => {
         </div>
         <p>
           <strong className="text-[24px] font-extrabold">
-            ₹{parseInt(data?.discount_cost)}
+            ₹{parseInt(data?.final_cost || "0")} &nbsp;
             <small className="text-[#8790A1]">/</small>&nbsp;
             <small className="text-[#8790A1] text-[14px] font-light">
               Candidate
@@ -102,7 +109,7 @@ const Header = ({ id, data }: { id: string; data: ExamDetails }) => {
           </strong>{" "}
           |{" "}
           <i className="bg-[#F5F7F9] text-[12px] p-1 px-2 rounded-2xl">
-            85 candidate registerd{" "}
+            {data?.registered_candidate} candidate registered{" "}
           </i>
         </p>
       </div>

@@ -22,11 +22,16 @@ export interface ExamDetails {
   start_datetime: string;
   discount_cost: string;
   attempt_per_person: string;
+  final_cost?: string;
+  published_on?: string;
+  created_on: string;
+  registered_candidate: number;
 }
 export interface ExamFormValues {
   exam_name: string;
   status: string;
   exam_type: string;
+  exam_category: string;
   duration: string;
   total_marks: string;
   cost: string;

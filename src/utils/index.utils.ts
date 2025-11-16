@@ -17,3 +17,20 @@ export const formatTime = (isoString: string) => {
   const date = new Date(isoString);
   return date.toISOString().substr(11, 5); // "HH:mm"
 };
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+
+  const day = date.getDate();
+  
+  const month = date.toLocaleString("en-US", { month: "short" }); // Oct
+  
+  const year = date.getFullYear();
+
+  const time = date.toLocaleString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+
+  return `${day} ${month} ${year} at ${time}`;
+}

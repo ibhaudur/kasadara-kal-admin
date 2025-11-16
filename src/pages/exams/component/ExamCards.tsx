@@ -51,7 +51,7 @@ const ExamCards: React.FC<DetailsProps> = ({ details }) => {
           </ul>
           {details.exam_type === "paid" && (
             <strong className="text-[24px] font-extrabold">
-              ₹{details?.discount_cost}
+              ₹{details?.final_cost}
             </strong>
           )}
         </div>
@@ -73,7 +73,7 @@ const ExamCards: React.FC<DetailsProps> = ({ details }) => {
             </span>
           </small>
           <i className="bg-[#F4ECFF] text-[12px] font-semibold py-1 px-3 rounded-3xl">
-            {details?.candidate_registered} candidate registerd{" "}
+            {details?.candidate_registered} candidate registered{" "}
           </i>
           <div className="mt-5">
             <small className="flex gap-2 items-center">
