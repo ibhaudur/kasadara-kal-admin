@@ -12,7 +12,7 @@ export interface RootState {
 }
 
 const userPersistConfig: PersistConfig<UserState> = {
-  key: "root",
+  key: "user",
   storage,
 };
 
@@ -23,6 +23,19 @@ const rootReducer = combineReducers({
 
 const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [
+          "persist/PERSIST",
+          "persist/REHYDRATE",
+          "persist/PAUSE",
+          "persist/FLUSH",
+          "persist/PURGE",
+          "persist/REGISTER",
+        ],
+      },
+    }),
 });
 
 const persistor = persistStore(store);

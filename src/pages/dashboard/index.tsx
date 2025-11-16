@@ -5,9 +5,17 @@ import avt from "../../../public/images/dashboard.svg";
 import Tiles from "./component/Tiles";
 import Overview from "./component/Overview";
 import { RootState } from "../../store/store";
+import useApiCall from "../../hooks/useApiCall";
+import { getDashboard } from "../../service/apiUrls";
 
 const Dashboard: React.FC = () => {
   const User = useSelector((state: RootState) => state?.user?.userDetails);
+  const { data } = useApiCall({
+    key: getDashboard,
+    url: getDashboard,
+    method: "get",
+  });
+  // console.log(data?.data);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(changeHeader("Dashboard"));
@@ -26,8 +34,8 @@ const Dashboard: React.FC = () => {
         </div>
         <img src={avt} alt="icon" />
       </div>
-      <Tiles />
-      <Overview />
+      <Tiles data={data?.data} />
+      <Overview data={data?.data} />
     </section>
   );
 };

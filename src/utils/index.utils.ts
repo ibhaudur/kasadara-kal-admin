@@ -21,9 +21,9 @@ export function formatDate(dateString: string): string {
   const date = new Date(dateString);
 
   const day = date.getDate();
-  
+
   const month = date.toLocaleString("en-US", { month: "short" }); // Oct
-  
+
   const year = date.getFullYear();
 
   const time = date.toLocaleString("en-US", {
@@ -33,4 +33,21 @@ export function formatDate(dateString: string): string {
   });
 
   return `${day} ${month} ${year} at ${time}`;
+}
+export function getStatusArray(details: any) {
+  return [
+    Number(details.published),
+    Number(details.scheduled),
+    Number(details.draft),
+  ];
+}
+export function extractChartData<T>(
+  data: T[],
+  labelKey: keyof T,
+  valueKey: keyof T
+) {
+  const labels = data?.map((item) => String(item[labelKey]));
+  const values = data?.map((item) => Number(item[valueKey]));
+
+  return { labels, values };
 }

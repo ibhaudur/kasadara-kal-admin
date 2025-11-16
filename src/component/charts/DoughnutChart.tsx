@@ -3,18 +3,6 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const data = {
-  labels: ["Published", "Scheduled", "Draft"],
-  datasets: [
-    {
-      data: [8, 3, 1],
-      backgroundColor: ["#2BBC7C", "#36D991", "#6DFFBE"], // These will be used for chart and legend
-      borderWidth: 1,
-      cutout: "80%",
-    },
-  ],
-};
-
 const options = {
   responsive: true,
   maintainAspectRatio: false,
@@ -23,7 +11,18 @@ const options = {
   },
 };
 
-const DoughnutChart: React.FC = () => {
+const DoughnutChart: React.FC<{ value?: number[] }> = ({ value }) => {
+  const data = {
+    labels: ["Published", "Scheduled", "Draft"],
+    datasets: [
+      {
+        data: value || [0, 0, 0],
+        backgroundColor: ["#2BBC7C", "#36D991", "#6DFFBE"], // These will be used for chart and legend
+        borderWidth: 1,
+        cutout: "80%",
+      },
+    ],
+  };
   const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
 
   return (

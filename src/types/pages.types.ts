@@ -81,3 +81,50 @@ export interface QuestionsStateProps {
   setQuestions: React.Dispatch<React.SetStateAction<QuestionItem[]>>;
   setFile: (file: File | null) => void;
 }
+
+export interface TilesProps {
+  data: {
+    total_payments?: number | string;
+    total_registered_candidates?: number;
+    average_attendance?: number;
+    category_wise_amount?: {
+      group_4_amount?: number | string;
+      group_2a_mains_amount?: number | string;
+      group_1_prelims_amount?: number | string;
+    };
+  };
+}
+
+export type AmountKeys =
+  | "total_payments"
+  | "group_4_amount"
+  | "group_2a_mains_amount"
+  | "group_1_prelims_amount";
+export interface StatusItem {
+  exam_category?: string;
+  published?: string | number;
+  scheduled?: string | number;
+  draft?: string | number;
+}
+
+export interface MonthlyItem {
+  month: string;
+  total_payments?: number;
+  total_amount?: string;
+  new_candidates?: number;
+  attendance_count?: number;
+}
+export interface OverviewProps {
+  data: {
+    category_status_overview?: {
+      group_4?: StatusItem;
+      group_2a_mains?: StatusItem;
+      group_1_prelims?: StatusItem;
+    };
+    payment_overview_monthly?: MonthlyItem[];
+    candidate_overview_monthly?: MonthlyItem[];
+    monthly_exam_attendance?: MonthlyItem[];
+    total_registered_candidates?: number;
+    total_payments?: number;
+  };
+}
