@@ -4,6 +4,7 @@ import { PiUploadSimpleBold } from "react-icons/pi";
 import CreateQuestions from "./CreateQuestions";
 import { QuestionsStateProps } from "../../../../../types/pages.types";
 import Modal from "../../../../../component/Modal/Modal";
+import { FiDownload } from "react-icons/fi";
 
 const QuestionsForm: React.FC<QuestionsStateProps> = ({
   questions,
@@ -18,6 +19,16 @@ const QuestionsForm: React.FC<QuestionsStateProps> = ({
         onClose={() => setIsOpen(false)}
         title="Bulk Upload"
       >
+        <div className="flex justify-end">
+          <a
+            href="/sample_exam_questions.xlsx"
+            download="sample_exam_questions.xlsx"
+            className="px-2 flex gap-2 items-center py-2 border border-[#3ac185] rounded-md text-[#3ac185] text-xs"
+          >
+            <FiDownload className="text-base" />
+            Download Sample
+          </a>
+        </div>
         <div className="min-w-3xs">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Upload File
