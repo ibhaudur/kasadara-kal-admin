@@ -96,7 +96,7 @@ const Exams: React.FC = () => {
         </div>
       </div>
       {data?.data?.length > 0 ? (
-        <div className="grid grid-cols-3 mt-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 gap-4">
           {data?.data?.map((item: ExamDetails, index: number) => {
             return <ExamCards key={index} details={item} />;
           })}
