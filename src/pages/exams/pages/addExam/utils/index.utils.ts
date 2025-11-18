@@ -81,9 +81,9 @@ export const examFormFields = [
     placeholder: "Select Exam Category",
     testId: "exam-category-input",
     options: [
-      { label: "Group 4", value: "group 4" },
-      { label: "Group 2A Mains", value: "group 2a mains" },
-      { label: "Group 1 Prelims", value: "group 1 prelims" },
+      { label: "Group 4", value: "Group 4" },
+      { label: "Group 2A Mains", value: "Group 2A Mains" },
+      { label: "Group 1 Prelims", value: "Group 1 Prelims" },
     ],
     required: true,
   },
