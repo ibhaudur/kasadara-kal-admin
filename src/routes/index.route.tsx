@@ -27,7 +27,7 @@ const AllRoutes: React.FC = () => {
             <Route path="exams/edit/:id" element={<AddExam />} />
             <Route path="payments" element={<Payments />} />
             <Route path="candidates" element={<Candidates />} />
-            <Route path="report" element={<Reports />} />
+            {/* <Route path="report" element={<Reports />} /> */}
           </Route>
         </Routes>
       </Suspense>

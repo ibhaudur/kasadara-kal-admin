@@ -29,10 +29,10 @@ export const RoutesList = [
     path: "/candidates",
     permission: "productManagement",
   },
-  {
-    title: "Report",
-    Icon: Reports,
-    path: "/report",
-    permission: "orderManagement",
-  },
+  // {
+  //   title: "Report",
+  //   Icon: Reports,
+  //   path: "/report",
+  //   permission: "orderManagement",
+  // },
 ];
