@@ -10,7 +10,7 @@ const Dashboard = lazy(() => import("../pages/dashboard"));
 const Exams = lazy(() => import("../pages/exams"));
 const Payments = lazy(() => import("../pages/payments"));
 const Candidates = lazy(() => import("../pages/candidates"));
-const Reports = lazy(() => import("../pages/reports"));
+// const Reports = lazy(() => import("../pages/reports"));
 
 const AllRoutes: React.FC = () => {
   return (

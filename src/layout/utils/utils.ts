@@ -2,7 +2,7 @@ import Dashboard from "../../../public/images/menu/dashboard.svg";
 import Exams from "../../../public/images/menu/exams.svg";
 import Payments from "../../../public/images/menu/payments.svg";
 import Candidates from "../../../public/images/menu/candidates.svg";
-import Reports from "../../../public/images/menu/report.svg";
+// import Reports from "../../../public/images/menu/report.svg";
 
 export const RoutesList = [
   {
