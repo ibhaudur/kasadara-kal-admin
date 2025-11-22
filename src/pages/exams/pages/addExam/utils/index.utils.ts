@@ -21,6 +21,7 @@ export const examSchema = Yup.object().shape({
   status: Yup.string(),
   exam_type: Yup.string().required("Exam type is required"),
   duration: Yup.number().required("Duration is required").positive().integer(),
+  exam_category: Yup.string().required("Exam category is required"),
   attempt_per_person: Yup.number()
     .required("Attempt per person is required")
     .min(0),
