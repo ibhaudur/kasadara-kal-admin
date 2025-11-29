@@ -24,7 +24,7 @@ const ViewExam = () => {
     setQuestions(data?.questions);
   }, [dispatch, data]);
   return (
-    <section className="mt-[1px]">
+    <section className="mt-px">
       <Header data={data?.examData} id={id || "0"} />
       <div className="p-4 flex gap-3">
         <ToatalQestions
@@ -32,7 +32,7 @@ const ViewExam = () => {
           select={select}
           setSelect={setSelect}
         />
-        <div className="bg-white p-4 flex-grow rounded-3xl">
+        <div className="bg-white p-4 grow rounded-3xl">
           <QuestionsList select={select} questions={questions} />
         </div>
       </div>

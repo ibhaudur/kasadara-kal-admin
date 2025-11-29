@@ -1,5 +1,6 @@
 import React from "react";
 import { QuestionFormProps } from "../../../../../types/pages.types";
+import { RichTextEditor } from "@mantine/rte";
 
 const QuestionForm: React.FC<QuestionFormProps> = ({
   select,
@@ -15,13 +16,17 @@ const QuestionForm: React.FC<QuestionFormProps> = ({
         {language.charAt(0).toUpperCase() + language.slice(1)}
       </label>
 
-      <textarea
-        placeholder="Type here..."
+      {/* Mantine Rich Text Editor for Question */}
+      <RichTextEditor
         value={q.question}
-        onChange={(e) =>
-          handleChange(select, language, "question", e.target.value)
-        }
-        className="w-full px-3 py-2 border rounded-[10px] text-[13px] bg-white border-[#D4DDE7] focus:outline-none focus:ring-2 placeholder:text-[12px] focus:ring-[#2BBC7C]"
+        onChange={(value) => handleChange(select, language, "question", value)}
+        className="mb-3 border rounded-[10px]"
+        controls={[
+          ["bold", "italic", "underline", "strike"],
+          ["unorderedList", "orderedList"],
+          ["blockquote", "codeBlock"],
+          ["clean"],
+        ]}
       />
 
       {/* Options */}
@@ -43,6 +48,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({
           </li>
         ))}
       </ul>
+
       <label className="flex text-[12px] mb-1">Answer</label>
       <select
         value={q.answer.toUpperCase()}
@@ -58,6 +64,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({
           </option>
         ))}
       </select>
+
       <label className="text-[13px]">Description</label>
       <textarea
         placeholder="Type here..."
