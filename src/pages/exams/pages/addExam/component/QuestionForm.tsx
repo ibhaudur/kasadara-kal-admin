@@ -33,7 +33,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({
       <ul className="mt-5">
         {(["A", "B", "C", "D"] as const).map((opt) => (
           <li className="flex gap-3 items-center mb-3" key={opt}>
-            <small className="m-0 w-[40px] h-[40px] text-center p-2 text-[14px] border bg-white border-[#EBEBEB] inline-block rounded-3xl">
+            <small className="m-0 w-10 h-10 text-center p-2 text-[14px] border bg-white border-[#EBEBEB] inline-block rounded-3xl">
               {opt}
             </small>
             <input

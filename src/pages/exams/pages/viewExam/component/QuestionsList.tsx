@@ -63,7 +63,7 @@ const QuestionsList: React.FC<QuestionsListProps> = ({ questions, select }) => {
               key={item.id}
               className="my-3 border-b border-b-[#E5E5E5] py-3 last:border-b-0 scroll-mt-30"
             >
-              <p className="font-bold flex gap-1 text-[15px]">
+              <p className="font-bold questions flex gap-1 text-[15px]">
                 {index + 1}.{" "}
                 <span dangerouslySetInnerHTML={{ __html: q.question }} />
               </p>
