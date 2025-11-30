@@ -80,10 +80,8 @@ const ExamCards: React.FC<DetailsProps> = ({ details }) => {
               <BiTimeFive className="text-[18px] text-[#2BBC7C] font-bold" />
               Start{" "}
               <b>
-                on{" "}
-                {moment(details.start_datetime)
-                  .local()
-                  .format("DD MMM, h:mm A")}
+                on {moment(details.exam_start_date).format("DD MMM YYYY, ")}
+                {moment(details.exam_start_time, "HH:mm:ss").format("hh:mm A")}
               </b>
             </small>
           </div>

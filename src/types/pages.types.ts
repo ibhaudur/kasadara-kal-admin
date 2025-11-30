@@ -26,6 +26,8 @@ export interface ExamDetails {
   published_on?: string;
   created_on: string;
   registered_candidate: number;
+  exam_start_date: string;
+  exam_start_time: string;
 }
 export interface ExamFormValues {
   exam_name: string;
