@@ -18,6 +18,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({
 
       {/* Mantine Rich Text Editor for Question */}
       <RichTextEditor
+        key={`${select}-${language}`}
         value={q.question}
         onChange={(value) => handleChange(select, language, "question", value)}
         className="mb-3 border rounded-[10px]"

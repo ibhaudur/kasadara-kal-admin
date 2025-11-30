@@ -100,9 +100,8 @@ const AddExam = () => {
       },
     });
   };
-
   return (
-    <section className="mt-[1px]">
+    <section className="mt-px">
       <div className="bg-white flex justify-between p-3 z-30 sticky top-0">
         <p className="flex items-center gap-3">
           <FaArrowLeft
