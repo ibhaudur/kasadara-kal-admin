@@ -10,7 +10,7 @@ const ToatalQestions: React.FC<StepsProps> = ({
     <div className="bg-white h-fit p-4 w-[239px] rounded-3xl sticky top-32 shrink-0">
       <p className="mb-2">Total questions : {questions?.length}</p>
 
-      <div className="flex gap-2 flex-wrap h-[68vh] overflow-y-scroll scrollbar-hide">
+      <div className="flex gap-2 flex-wrap max-h-[68vh] overflow-y-scroll scrollbar-hide">
         {Array.from({ length: questions?.length }).map((_, index) => (
           <small
             key={index}
