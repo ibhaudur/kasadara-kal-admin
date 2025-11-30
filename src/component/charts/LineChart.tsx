@@ -44,15 +44,16 @@ const lineOptions = {
 };
 
 // Component
-const LineChart: React.FC<{ labels: string[]; values: number[] }> = ({
-  labels,
-  values,
-}) => {
+const LineChart: React.FC<{
+  labels: string[];
+  values: number[];
+  chartLabel: string;
+}> = ({ labels, values, chartLabel }) => {
   const lineData = {
     labels: labels,
     datasets: [
       {
-        label: "Accuracy",
+        label: chartLabel ?? "Accuracy",
         data: values,
         borderColor: "rgba(44, 140, 83, 1)", // Solid green line
         backgroundColor: (context: any) => {

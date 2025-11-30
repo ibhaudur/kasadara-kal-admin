@@ -73,7 +73,11 @@ const Overview: React.FC<OverviewProps> = ({ data }) => {
             </p>
           </div>
         </div>
-        <LineChart labels={paymentLabels} values={paymentValues} />
+        <LineChart
+          labels={paymentLabels}
+          values={paymentValues}
+          chartLabel="Payments"
+        />
       </div>
 
       <div className="bg-white p-4 rounded-2xl shadow w-full md:col-span-3 lg:col-span-3">
@@ -89,7 +93,11 @@ const Overview: React.FC<OverviewProps> = ({ data }) => {
             </p>
           </div>
         </div>
-        <LineChart labels={candidateLabels} values={candidateValues} />
+        <LineChart
+          labels={candidateLabels}
+          values={candidateValues}
+          chartLabel="Candidates"
+        />
       </div>
 
       <div className="bg-white flex justify-between p-4 rounded-2xl shadow w-full md:col-span-3 lg:col-span-3">
