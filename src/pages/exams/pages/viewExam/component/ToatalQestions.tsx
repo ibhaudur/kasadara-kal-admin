@@ -17,7 +17,7 @@ const ToatalQestions: React.FC<StepsProps> = ({
             onClick={() => {
               if (index < questions?.length) setSelect(index + 1);
             }}
-            className={`w-[35px] h-[35px] flex items-center justify-center text-[12px]  rounded-[12px] shrink-0 ${
+            className={`w-[35px] h-[35px] flex items-center justify-center text-[12px]  rounded-xl shrink-0 ${
               select === index + 1 ? "bg-[#2BBC7C] text-white" : "bg-[#F8F8F8]"
             } ${
               Number(questions?.length) >= index + 1

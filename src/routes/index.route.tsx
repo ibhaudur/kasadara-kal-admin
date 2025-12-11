@@ -10,6 +10,7 @@ const Dashboard = lazy(() => import("../pages/dashboard"));
 const Exams = lazy(() => import("../pages/exams"));
 const Payments = lazy(() => import("../pages/payments"));
 const Candidates = lazy(() => import("../pages/candidates"));
+const Referrals = lazy(() => import("../pages/referrals"));
 // const Reports = lazy(() => import("../pages/reports"));
 
 const AllRoutes: React.FC = () => {
@@ -27,6 +28,7 @@ const AllRoutes: React.FC = () => {
             <Route path="exams/edit/:id" element={<AddExam />} />
             <Route path="payments" element={<Payments />} />
             <Route path="candidates" element={<Candidates />} />
+            <Route path="referrals" element={<Referrals />} />
             {/* <Route path="report" element={<Reports />} /> */}
           </Route>
         </Routes>

@@ -29,6 +29,12 @@ export const RoutesList = [
     path: "/candidates",
     permission: "productManagement",
   },
+  {
+    title: "Referrals",
+    Icon: Candidates,
+    path: "/referrals",
+    permission: "productManagement",
+  },
   // {
   //   title: "Report",
   //   Icon: Reports,

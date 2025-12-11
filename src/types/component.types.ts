@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export interface SelectOptions {
   label: string;
-  value: string;
+  value: string | number;
 }
 interface OptionsList {
   [key: string]: { [key: string]: unknown }[];

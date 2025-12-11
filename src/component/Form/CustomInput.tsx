@@ -1,6 +1,7 @@
 import { Field, useFormikContext } from "formik";
 import React, { ReactNode } from "react";
 import { CustomInputProps } from "../../types/component.types";
+import MultiSelectField from "./MultiSelectField";
 
 const CustomInput: React.FC<CustomInputProps> = ({
   label,
@@ -97,7 +98,16 @@ const CustomInput: React.FC<CustomInputProps> = ({
                 ))}
           </Field>
         );
-
+      case "multiselect":
+        return (
+          <MultiSelectField
+            name={name}
+            options={options || []}
+            disabled={disabled}
+            placeholder={placeholder}
+            testId={testId}
+          />
+        );
       case "radio":
         return (
           <div className={`flex ${splClass}`}>
