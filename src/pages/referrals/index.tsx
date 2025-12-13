@@ -2,58 +2,81 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeHeader } from "../../store/slice/headerSlice";
 import SearchBox from "../../component/SearchBox";
-import CandidateList from "./components/CandidateList";
+import ReferralList from "./components/ReferralList";
 import useDebounce from "../../hooks/useDebounce";
-import { getCandidatesList } from "../../service/apiUrls";
+import {
+  getReferralsList,
+  postAddReferral,
+  updateReferralById,
+} from "../../service/apiUrls";
 import useApiCall from "../../hooks/useApiCall";
 import Pagination from "../../component/UI/Pagination";
 import Modal from "../../component/Modal/Modal";
 import ReferralForm from "./components/ReferralForm";
-import { ExamFormValues } from "./utils/index.utils";
+import { Referral } from "./utils/index.utils";
 import { FormikHelpers } from "formik";
+import { ApiError, ApiResponse } from "../../types/apiservice.types";
+import { toast } from "react-toastify";
 
 const Referrals: React.FC = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [open, setOpen] = useState(false);
+  const [details, setDetails] = useState<Referral | null>(null);
   const [filter, setFilter] = useState({ search: "" });
   const debouncedSearch = useDebounce(filter.search, 500);
-  const url = getCandidatesList
+  const url = getReferralsList
     .replace(":page", String(page))
     .replace(":limit", String(limit))
     .replace(":search", debouncedSearch);
-  const { data } = useApiCall({
+  const { data, refetch } = useApiCall({
     key: url,
     url: url,
     method: "get",
   });
-  const pagination = data?.data?.pagination;
+  const pagination = data;
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(changeHeader("Referrals"));
   }, []);
+  const Mutateurl = details
+    ? updateReferralById.replace(":id", String(details.id))
+    : postAddReferral;
+  const { mutate } = useApiCall({
+    key: Mutateurl,
+    url: Mutateurl,
+    method: details ? "put" : "post",
+  });
+
   const handleSubmit = async (
-    values: ExamFormValues,
-    actions: FormikHelpers<ExamFormValues>
+    values: Referral,
+    actions: FormikHelpers<Referral>
   ) => {
     console.log(values);
-    // const data = { examData: values, questions };
+    mutate(values, {
+      onSuccess: (res: ApiResponse<any>) => {
+        actions.setSubmitting(false);
+        toast.success(res?.message);
+        refetch();
 
-    // const bulkData = createBulkData(values, file);
-
-    // mutate(file ? bulkData : data, {
-    //   onSuccess: (res: ApiResponse<any>) => {
-    //     actions.setSubmitting(false);
-    //     toast.success(res?.message);
-    //     navigate(-1);
-    //   },
-    //   onError: (err: ApiError) => {
-    //     actions.setSubmitting(false);
-    //     toast.error(err.response?.data?.message);
-    //   },
-    // });
+        setOpen(false);
+      },
+      onError: (err: ApiError) => {
+        actions.setSubmitting(false);
+        toast.error(err.response?.data?.message);
+      },
+    });
   };
+  const startEdit = (referral: Referral) => {
+    setDetails(referral);
+    setOpen(true);
+  };
+  const cancelEdit = () => {
+    setDetails(null);
+    setOpen(false);
+  };
+  console.log(details);
   return (
     <section className="p-4">
       <div className="rounded-2xl bg-white p-3">
@@ -81,22 +104,22 @@ const Referrals: React.FC = () => {
           </button>
         </div>
       </div>
-      <Modal isOpen={open} onClose={() => setOpen(false)} title="Add Referrals">
+      <Modal isOpen={open} onClose={cancelEdit} title="Add Referrals">
         <div className="p-4">
-          <ReferralForm handleSubmit={handleSubmit} />
+          <ReferralForm handleSubmit={handleSubmit} details={details} />
         </div>
       </Modal>
-      <CandidateList list={[]} />
-      {/* <Pagination
+      <ReferralList list={data?.data || []} startEdit={startEdit} />
+      <Pagination
         page={page}
         limit={limit}
         total={pagination ? pagination.totalPages : 0}
         onPageChange={(p) => setPage(p)}
         onLimitChange={(l) => {
           setLimit(l);
-          setPage(1); // reset to 1 when limit changes
+          setPage(1);
         }}
-      /> */}
+      />
     </section>
   );
 };

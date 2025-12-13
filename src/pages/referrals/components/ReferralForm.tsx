@@ -2,26 +2,24 @@ import React from "react";
 import { Formik, Form, FormikHelpers } from "formik";
 import {
   examFormFields,
-  ExamFormValues,
   examInitialValues,
   examSchema,
+  Referral,
 } from "../utils/index.utils";
-import { useParams } from "react-router-dom";
 import CustomInput from "../../../component/Form/CustomInput";
 
 interface ExamFormProps {
   handleSubmit: (
-    values: ExamFormValues,
-    actions: FormikHelpers<ExamFormValues>
+    values: Referral,
+    actions: FormikHelpers<Referral>
   ) => void | Promise<void>;
-  details?: ExamFormValues;
+  details?: Referral | null;
 }
 
 const ReferralForm: React.FC<ExamFormProps> = ({ handleSubmit, details }) => {
-  const { id } = useParams();
   return (
     <Formik
-      initialValues={id && details ? details : examInitialValues}
+      initialValues={details ? details : examInitialValues}
       validationSchema={examSchema}
       onSubmit={handleSubmit}
       enableReinitialize={true}

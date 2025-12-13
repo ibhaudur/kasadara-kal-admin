@@ -8,6 +8,7 @@ interface MultiSelectProps {
   disabled?: boolean;
   placeholder?: string;
   testId?: string;
+  required?: boolean;
 }
 
 const MultiSelectField: React.FC<MultiSelectProps> = ({
@@ -16,6 +17,7 @@ const MultiSelectField: React.FC<MultiSelectProps> = ({
   disabled,
   placeholder,
   testId,
+  required,
 }) => {
   const { setFieldValue, values } = useFormikContext<Record<string, any>>();
 

@@ -10,3 +10,8 @@ export const getPaymenrtDetails =
 export const getCandidatesList =
   "registered-candidates?page=:page&limit=:limit&search=:search";
 export const postBulkUpload = "upload_exam";
+
+export const getReferralsList =
+  "refferal?page=:page&limit=:limit&search=:search";
+export const postAddReferral = "refferal";
+export const updateReferralById = "refferal/:id";

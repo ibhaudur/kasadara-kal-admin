@@ -106,6 +106,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
             disabled={disabled}
             placeholder={placeholder}
             testId={testId}
+            required={required}
           />
         );
       case "radio":

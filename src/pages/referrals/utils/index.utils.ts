@@ -1,24 +1,25 @@
 import * as Yup from "yup";
-export interface ExamFormValues {
+export interface Referral {
+  id?: number;
   name: string;
   email: string;
   promocode: string;
-  mappedExams: { label: string; value: string }[];
+  mapped_exams: { label: string; value: string }[];
   offerPercent: string;
 }
 
-export const examInitialValues: ExamFormValues = {
+export const examInitialValues: Referral = {
   name: "",
   email: "",
   promocode: "",
-  mappedExams: [],
+  mapped_exams: [],
   offerPercent: "",
 };
 export const examSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   email: Yup.string().email("Invalid Email").required("Email is required"),
   promocode: Yup.string().required("Promo Code is required"),
-  mappedExams: Yup.array()
+  mapped_exams: Yup.array()
     .of(Yup.string().required())
     .min(1, "Select at least one exam")
     .required("Mapped exams is required"),
@@ -55,14 +56,14 @@ export const examFormFields = [
   },
   {
     label: "Mapped Exams",
-    name: "mappedExams",
+    name: "mapped_exams",
     type: "multiselect",
     placeholder: "Search & Select Exams",
     required: true,
     options: [
-      { label: "Maths", value: 1 },
-      { label: "Physics", value: 2 },
-      { label: "Chemistry", value: 3 },
+      { label: "Maths", value: 93 },
+      { label: "Physics", value: 92 },
+      { label: "Chemistry", value: 91 },
     ],
   },
 ];
