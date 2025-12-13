@@ -15,14 +15,13 @@ const Dashboard: React.FC = () => {
     url: getDashboard,
     method: "get",
   });
-  // console.log(data?.data);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(changeHeader("Dashboard"));
   }, []);
   return (
     <section className="p-4">
-      <div className="rounded-[16px] flex justify-between items-center bg-white p-3">
+      <div className="rounded-2xl flex justify-between items-center bg-white p-3">
         <div>
           <h5 className="text-[24px] font-medium">
             Welcome back <b>{User?.name}!</b>

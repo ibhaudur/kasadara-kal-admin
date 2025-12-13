@@ -40,7 +40,6 @@ const Referrals: React.FC = () => {
     url: getExamsList,
     method: "get",
   });
-  console.log(ExamsList?.data);
   const pagination = data;
 
   const dispatch = useDispatch();
@@ -82,7 +81,6 @@ const Referrals: React.FC = () => {
     setDetails(null);
     setOpen(false);
   };
-  console.log(details);
   return (
     <section className="p-4">
       <div className="rounded-2xl bg-white p-3">
