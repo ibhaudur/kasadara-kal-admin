@@ -15,3 +15,4 @@ export const getReferralsList =
   "refferal?page=:page&limit=:limit&search=:search";
 export const postAddReferral = "refferal";
 export const updateReferralById = "refferal/:id";
+export const getExamsList = "exam_names_only";

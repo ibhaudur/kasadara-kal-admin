@@ -14,9 +14,14 @@ interface ExamFormProps {
     actions: FormikHelpers<Referral>
   ) => void | Promise<void>;
   details?: Referral | null;
+  examList: Array<{ exam_id: number; exam_name: string }>;
 }
 
-const ReferralForm: React.FC<ExamFormProps> = ({ handleSubmit, details }) => {
+const ReferralForm: React.FC<ExamFormProps> = ({
+  handleSubmit,
+  details,
+  examList,
+}) => {
   return (
     <Formik
       initialValues={details ? details : examInitialValues}
@@ -24,12 +29,12 @@ const ReferralForm: React.FC<ExamFormProps> = ({ handleSubmit, details }) => {
       onSubmit={handleSubmit}
       enableReinitialize={true}
     >
-      {(formikProps) => <FormFields {...formikProps} />}
+      {(formikProps) => <FormFields {...formikProps} examList={examList} />}
     </Formik>
   );
 };
 
-const FormFields: React.FC<any> = () => {
+const FormFields: React.FC<any> = ({ examList }) => {
   return (
     <Form className="grid grid-cols-12 gap-4">
       {examFormFields.map((field, index) => (
@@ -39,7 +44,11 @@ const FormFields: React.FC<any> = () => {
             index === examFormFields.length - 1 ? "col-span-12" : "col-span-6"
           }
         >
-          <CustomInput {...field} testId={field.name} />
+          <CustomInput
+            {...field}
+            testId={field.name}
+            optionsList={{ exam: examList }}
+          />
         </div>
       ))}
 

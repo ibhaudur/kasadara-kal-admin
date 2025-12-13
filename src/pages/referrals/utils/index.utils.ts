@@ -60,10 +60,8 @@ export const examFormFields = [
     type: "multiselect",
     placeholder: "Search & Select Exams",
     required: true,
-    options: [
-      { label: "Maths", value: 93 },
-      { label: "Physics", value: 92 },
-      { label: "Chemistry", value: 91 },
-    ],
+    parameter: "exam",
+    keyValue: "exam_id",
+    labelValue: "exam_name",
   },
 ];

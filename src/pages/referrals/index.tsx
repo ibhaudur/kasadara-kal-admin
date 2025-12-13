@@ -5,6 +5,7 @@ import SearchBox from "../../component/SearchBox";
 import ReferralList from "./components/ReferralList";
 import useDebounce from "../../hooks/useDebounce";
 import {
+  getExamsList,
   getReferralsList,
   postAddReferral,
   updateReferralById,
@@ -34,6 +35,12 @@ const Referrals: React.FC = () => {
     url: url,
     method: "get",
   });
+  const { data: ExamsList } = useApiCall({
+    key: getExamsList,
+    url: getExamsList,
+    method: "get",
+  });
+  console.log(ExamsList?.data);
   const pagination = data;
 
   const dispatch = useDispatch();
@@ -53,7 +60,6 @@ const Referrals: React.FC = () => {
     values: Referral,
     actions: FormikHelpers<Referral>
   ) => {
-    console.log(values);
     mutate(values, {
       onSuccess: (res: ApiResponse<any>) => {
         actions.setSubmitting(false);
@@ -82,14 +88,14 @@ const Referrals: React.FC = () => {
       <div className="rounded-2xl bg-white p-3">
         <h5 className="text-[20px] font-semibold">Referrals</h5>
         <small className="text-[#8790A1]">
-          All candidate details are listed below. Track their registration,
-          payment, and exam progress easily.
+          All referrals details are listed below. Track their promocodes, offer
+          Percentage, and exam easily.
         </small>
       </div>
-      <div className="flex justify-between items-center mt-5">
-        <small className="text-[14px] text-[#172B4D]">
+      <div className="flex justify-end items-center mt-5">
+        {/* <small className="text-[14px] text-[#172B4D]">
           Total Referrals: {pagination?.totalItems || 0}
-        </small>
+        </small> */}
         <div className="flex gap-3">
           <SearchBox
             OnChange={(e) =>
@@ -104,9 +110,17 @@ const Referrals: React.FC = () => {
           </button>
         </div>
       </div>
-      <Modal isOpen={open} onClose={cancelEdit} title="Add Referrals">
+      <Modal
+        isOpen={open}
+        onClose={cancelEdit}
+        title={details ? "Edit Referrals" : "Add Referrals"}
+      >
         <div className="p-4">
-          <ReferralForm handleSubmit={handleSubmit} details={details} />
+          <ReferralForm
+            handleSubmit={handleSubmit}
+            details={details}
+            examList={ExamsList?.data || []}
+          />
         </div>
       </Modal>
       <ReferralList list={data?.data || []} startEdit={startEdit} />

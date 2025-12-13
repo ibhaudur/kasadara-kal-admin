@@ -102,7 +102,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
         return (
           <MultiSelectField
             name={name}
-            options={options || []}
+            options={
+              parameter
+                ? (optionsList?.[parameter] || []).map((option: any) => ({
+                    value: keyValue ? option?.[keyValue] : "",
+                    label: labelValue ? option?.[labelValue] : "",
+                  }))
+                : options || []
+            }
             disabled={disabled}
             placeholder={placeholder}
             testId={testId}
